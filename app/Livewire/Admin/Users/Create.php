@@ -20,12 +20,13 @@ class Create extends Component
 
     public function save()
     {
-        die($_POST);
-        
         // Validate data
         $this->validate([
             'name'=>'required|string|max:255',
-            'email'=>'required|email|unique:users,email',
+            'email'=> [
+                'required','email','max:255','unique:users,email',
+                'regex:/@fecofa\.cd$/i',   // ← domaine obligatoire
+            ],
             'role'=>'required|in:'.implode(',',$this->roles),
         ]);
 
@@ -39,7 +40,8 @@ class Create extends Component
 
         $user->assignRole($this->role); // Assign role
         // Invitation
-        Password::sendResetLink(['email' => $user->email]);
+      
+        Password::broker('invites')->sendResetLink(['email' => $user->email]);
 
         session()->flash('status', 'User created successfully and invitation sent !');
 

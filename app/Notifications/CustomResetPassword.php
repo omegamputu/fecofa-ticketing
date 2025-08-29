@@ -11,7 +11,7 @@ class CustomResetPassword extends Notification
 {
     use Queueable;
 
-    protected $token;
+    //protected $token;
 
     /**
      * Create a new notification instance.
@@ -43,7 +43,7 @@ class CustomResetPassword extends Notification
             ->line('Vous avez été invité à utiliser l\'application de gestion des tickets de la FECOFA.')
             ->line('Cliquez sur le bouton ci-dessous pour définir votre mot de passe et activer votre compte.')
             ->action('Définir mot mot de passe', url(config('app.url').route('password.reset', $this->token, false)))
-            ->line('Ce lien expirera dans '. config('auth.passwords.'. config('auth.defaults.passwords'). '.expire'). ' minutes.')
+            ->line('Ce lien expirera dans '.config('auth.passwords.'.config('auth.defaults.passwords'). '.expire'). ' minutes.')
             ->line('Si vous n\'avez pas demandé cet accès, ignorez cet email.');
     }
 
