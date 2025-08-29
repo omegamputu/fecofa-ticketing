@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Livewire\Admin\Users\Index as UsersIndex;
+use App\Livewire\Admin\Users\Create as UsersCreate;
+use App\Livewire\Admin\Users\Edit as UsersEdit;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,7 +19,8 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 
-Route::middleware(['auth', 'permission:admin.access'])->prefix('admin')->name('admin')
+Route::middleware(['auth', 'permission:admin.access'])->prefix('admin')
+    ->name('admin')->as('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -26,9 +30,7 @@ Route::middleware(['auth', 'permission:admin.access'])->prefix('admin')->name('a
         Route::get('users/{user}/edit', UsersEdit::class)->name('users.edit');
 
         // Gestion Admins (restreinte au Super-Admin)
-        Route::resource('admins', AdminsController::class)
-              ->only(['index','create','store','edit','update','destroy'])
-              ->middleware('role:Super-Admin');
+       // Route::resource('admins', AdminsController::class)->only(['index','create','store','edit','update','destroy'])->middleware('role:Super-Admin');
 
         // Gestion rôles & permissions (option : Super-Admin uniquement)
         Route::resource('roles', RolesController::class)
