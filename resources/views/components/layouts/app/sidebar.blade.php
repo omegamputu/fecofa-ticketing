@@ -15,11 +15,18 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Platform')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
+                @can('admin.access')
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                <flux:navlist.item icon="user" :href="route('admin.users.index')"
+                @endcan
+                
+                {{-- Users : visible UNIQUEMENT si users.manage --}}
+                @can('users.manage')
+                    <flux:navlist.item icon="user" :href="route('admin.users.index')"
                     :current="request()->routeIs('admin.users.index')" wire:navigate>{{ __('Users') }}
-                </flux:navlist.item>
+                    </flux:navlist.item>
+                @endcan
             </flux:navlist.group>
         </flux:navlist>
 
