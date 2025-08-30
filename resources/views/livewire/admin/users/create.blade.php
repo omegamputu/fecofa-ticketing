@@ -4,31 +4,27 @@
             <h1 class="text-xl font-semibold mb-4">Créer un utilisateur</h1>
 
             <form wire:submit="save" class="space-y-4">
-                <div>
-                    <label class="block text-sm">Nom</label>
-                    <input type="text" wire:model.defer="name" class="border rounded px-3 py-2 w-full">
-                    @error('name') <div class="text-red-600 text-sm">{{ $message }}</div> @enderror
+                <div class="mb-5">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
+                    <input type="text" wire:model.defer="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required />
                 </div>
-                <div>
-                    <label class="block text-sm">Email</label>
-                    <input type="email" wire:model.defer="email" class="border rounded px-3 py-2 w-full">
-                    @error('email') <div class="text-red-600 text-sm">{{ $message }}</div> @enderror
+                
+                <div class="mb-5">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                    <input type="email" wire:model.defer="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@fecofa.cd" required />
                 </div>
-                <div>
-                    <label class="block text-sm">Rôle</label>
-                    <select wire:model="role" class="border rounded px-3 py-2 w-full">
-                        <option value="">— Choisir —</option>
+                
+                <div class="mb-5">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rôle</label>
+                    <select wire:model="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">— Select Role —</option>
                         @foreach($roles as $r)
                         <option value="{{ $r }}">{{ $r }}</option>
                         @endforeach
                     </select>
-                    @error('role')
-                    <div class="text-red-600 text-sm">{{ $message }}</div>
-                    @enderror
                 </div>
 
-                <button class="border cursor-pointer rounded px-4 py-2">Créer & envoyer
-                    l’invitation</button>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
             </form>
         </div>
     </div>

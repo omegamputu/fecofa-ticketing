@@ -107,7 +107,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
                 <flux:link class="absolute end-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
                     {{ __('Forgot your password?') }}
                 </flux:link>
-            @endif
+            @endif 
         </div>
 
         <!-- Remember Me -->

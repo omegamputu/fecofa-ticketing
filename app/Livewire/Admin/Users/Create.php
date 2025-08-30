@@ -23,10 +23,7 @@ class Create extends Component
         // Validate data
         $this->validate([
             'name'=>'required|string|max:255',
-            'email'=> [
-                'required','email','max:255','unique:users,email',
-                'regex:/@fecofa\.cd$/i',   // ← domaine obligatoire
-            ],
+            'email' => ['required','email','max:255','unique:users,email','regex:/@fecofa\.cd$/i'],
             'role'=>'required|in:'.implode(',',$this->roles),
         ]);
 
@@ -43,12 +40,18 @@ class Create extends Component
       
         Password::broker('invites')->sendResetLink(['email' => $user->email]);
 
+        $user->forceFill([
+            'invited_at' => now(),
+        ])->save();
+
+        $user->increment('invitation_sent_count');
+
         session()->flash('status', 'User created successfully and invitation sent !');
 
          return redirect()->route('admin.users.index');
     }
     public function render()
     {
-        return view('livewire.admin.users.create');
+        return view('livewire.admin.users.create')->title('Créer utilisateur');
     }
 }

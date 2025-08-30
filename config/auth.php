@@ -97,8 +97,8 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-            // Broker spécial invitation
-            'invites' => [
+        // Broker spécial invitation
+        'invites' => [
             'provider' => 'users',
             'table'    => 'password_reset_tokens',
             'expire'   => env('INVITE_TOKEN_EXPIRE', 30),     // ← ex: 30 minutes

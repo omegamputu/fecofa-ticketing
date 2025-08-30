@@ -79,6 +79,9 @@ class RolesAndPermissionsSeeder extends Seeder
                 'password' => Hash::make($pass),
             ]
         );
+
+        $user->forceFill(['password_set_at' => now()])->save();
+
         $user->syncRoles(['Super-Admin']);
 
 

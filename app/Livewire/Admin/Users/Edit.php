@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Password;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
@@ -34,8 +35,43 @@ class Edit extends Component
         session()->flash('status','Utilisateur mis à jour.');
         return redirect()->route('admin.users.index');
     }
+
+    public function resendInvitation()
+    {
+        $this->authorize('users.manage');
+
+        // Renvoi via broker d’invitation
+        Password::broker('invites')->sendResetLink(['email' => $this->user->email]);
+
+        // Trace
+        $this->user->invited_at = now();
+        $this->user->increment('invitation_sent_count');
+        $this->user->save();
+
+        session()->flash('status','Invitation renvoyée à '.$this->user->email);
+    }
+
+    private function statusLabel(): string
+    {
+        if (is_null($this->user->invited_at)) {
+            return 'Jamais invité';
+        }
+        if (is_null($this->user->last_login_at)) {
+            return 'Invité (en attente)';
+        }
+
+        // grâce aux casts, c’est un Carbon ; sinon on parse par sécurité
+        $last = $this->user->last_login_at instanceof \Illuminate\Support\Carbon
+            ? $this->user->last_login_at
+            : \Illuminate\Support\Carbon::parse($this->user->last_login_at);
+
+        return 'Actif — dernière connexion : '.$last->format('d/m/Y H:i');
+    }
+
     public function render()
     {
-        return view('livewire.admin.users.edit');
+        return view('livewire.admin.users.edit', [
+            'statusLabel'=> $this->statusLabel(),
+        ])->title('Éditer utilisateur');
     }
 }

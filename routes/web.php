@@ -9,17 +9,21 @@ use Livewire\Volt\Volt;
 use App\Livewire\Admin\Users\Index as UsersIndex;
 use App\Livewire\Admin\Users\Create as UsersCreate;
 use App\Livewire\Admin\Users\Edit as UsersEdit;
+use App\Livewire\Auth\InviteSetPassword;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('/invite/accept/{token}', InviteSetPassword::class)
+    ->name('invite.accept'); // volontairement sans middleware 'guest'
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 
-Route::middleware(['auth', 'permission:admin.access'])->prefix('admin')
+Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->prefix('admin')
     ->name('admin')->as('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
