@@ -7,17 +7,17 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $categories;
-
-    public function mount()
-    {
-        abort_unless(auth()->user()->can('categories.manage'), 403);
-        $this->categories = Category::select('id', 'name', 'description')->get();
-
-    }
-
     public function render()
     {
-        return view('livewire.admin.category.index')->title('Liste catégories');
+        $categories = Category::select('id', 'name', 'description')->get();
+
+        return view('livewire.admin.category.index', compact('categories'))->title('Liste catégories');
+    }
+
+    public function delete(int $id)
+    {
+        abort_unless(auth()->user()->can('categories.manage'), 403);
+        Category::findOrFail($id)->delete();
+        session()->flash('status', 'Catégorie supprimée avec succès.');
     }
 }

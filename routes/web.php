@@ -10,6 +10,7 @@ use App\Livewire\Admin\Users\Index as UsersIndex;
 use App\Livewire\Admin\Users\Create as UsersCreate;
 use App\Livewire\Admin\Users\Edit as UsersEdit;
 use App\Livewire\Admin\Category\Index as CategoryIndex;
+use App\Livewire\Admin\Category\Create as CategoryCreate;
 use App\Livewire\Auth\InviteSetPassword;
 use App\Models\Category;
 
@@ -37,7 +38,7 @@ Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->pre
 
         // Gestion categories
         Route::get('categories', CategoryIndex::class)->name('categories.index');
-        Route::get('categories/create', CategoryIndex::class)->name('categories.create');
+        Route::get('categories/create', CategoryCreate::class)->name('categories.create');
         Route::get('categories/{category}/edit', CategoryIndex::class)->name('categories.edit');
 
         // Gestion Admins (restreinte au Super-Admin)
