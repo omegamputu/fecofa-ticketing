@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Users;
 
+use App\Models\Category;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;

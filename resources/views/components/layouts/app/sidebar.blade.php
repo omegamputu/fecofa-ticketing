@@ -27,6 +27,12 @@
                     :current="request()->routeIs('admin.users.index')" wire:navigate>{{ __('Users') }}
                     </flux:navlist.item>
                 @endcan
+
+                @can('categories.manage')
+                    <flux:navlist.item icon="tag" :href="route('admin.categories.index')"
+                    :current="request()->routeIs('admin.categories.index')" wire:navigate>{{ __('Categories') }}
+                    </flux:navlist.item>
+                @endcan
             </flux:navlist.group>
         </flux:navlist>
 
