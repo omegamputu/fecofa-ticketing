@@ -9,7 +9,9 @@ use Livewire\Volt\Volt;
 use App\Livewire\Admin\Users\Index as UsersIndex;
 use App\Livewire\Admin\Users\Create as UsersCreate;
 use App\Livewire\Admin\Users\Edit as UsersEdit;
+use App\Livewire\Admin\Category\Index as CategoryIndex;
 use App\Livewire\Auth\InviteSetPassword;
+use App\Models\Category;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +34,11 @@ Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->pre
         Route::get('users', UsersIndex::class)->name('users.index');
         Route::get('users/create', UsersCreate::class)->name('users.create');
         Route::get('users/{user}/edit', UsersEdit::class)->name('users.edit');
+
+        // Gestion categories
+        Route::get('categories', CategoryIndex::class)->name('categories.index');
+        Route::get('categories/create', CategoryIndex::class)->name('categories.create');
+        Route::get('categories/{category}/edit', CategoryIndex::class)->name('categories.edit');
 
         // Gestion Admins (restreinte au Super-Admin)
        // Route::resource('admins', AdminsController::class)->only(['index','create','store','edit','update','destroy'])->middleware('role:Super-Admin');
