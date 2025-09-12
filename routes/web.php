@@ -29,11 +29,10 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
 Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->prefix('admin')
     ->name('admin')->as('admin.')
     ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Gestion utilisateurs “classiques”
         Route::get('users', UsersIndex::class)->name('users.index');
@@ -45,15 +44,11 @@ Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->pre
         Route::get('categories/create', CategoryCreate::class)->name('categories.create');
         Route::get('categories/{category}/edit', CategoryEdit::class)->name('categories.edit');
 
-        // Gestion Admins (restreinte au Super-Admin)
-       // Route::resource('admins', AdminsController::class)->only(['index','create','store','edit','update','destroy'])->middleware('role:Super-Admin');
-
         // Gestion rôles & permissions (option : Super-Admin uniquement)
         Route::resource('roles', RolesController::class)
               ->only(['index','store','update','destroy'])
               ->middleware('role:Super-Admin');
 });
-
 
 Route::middleware(['auth', 'must-set-password']) // pas besoin d'admin ici
     ->prefix('tickets')->as('tickets.')

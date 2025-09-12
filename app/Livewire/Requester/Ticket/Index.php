@@ -3,6 +3,7 @@
 namespace App\Livewire\Requester\Ticket;
 
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,7 +19,7 @@ class Index extends Component
     public function render()
     {
 
-        $q = Ticket::query()->where('created_by', auth()->id());
+        $q = Ticket::query()->where('created_by', Auth::id());
 
         if ($this->search)  $q->where(fn($qq)=>$qq
             ->where('subject','like',"%{$this->search}%")

@@ -17,16 +17,10 @@
             <flux:navlist.group :heading="__('Platform')" class="grid">
                 {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
                 @can('admin.access')
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                    <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 @endcan
 
-                {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
-                @can('tickets.create')
-                    <flux:navlist.item icon="ticket" :href="route('tickets.index')" :current="request()->routeIs('tickets.index')"
-                    wire:navigate>{{ __('Mes tickets') }}</flux:navlist.item>
-                @endcan
-                
                 {{-- Users : visible UNIQUEMENT si users.manage --}}
                 @can('users.manage')
                     <flux:navlist.item icon="user" :href="route('admin.users.index')"
@@ -38,6 +32,14 @@
                     <flux:navlist.item icon="tag" :href="route('admin.categories.index')"
                     :current="request()->routeIs('admin.categories.index')" wire:navigate>{{ __('Categories') }}
                     </flux:navlist.item>
+                @endcan
+
+                {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
+                @can('tickets.create')
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                    wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="ticket" :href="route('tickets.index')" :current="request()->routeIs('tickets.index')"
+                    wire:navigate>{{ __('Mes tickets') }}</flux:navlist.item>
                 @endcan
             </flux:navlist.group>
         </flux:navlist>
