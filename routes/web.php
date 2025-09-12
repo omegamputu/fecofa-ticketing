@@ -14,9 +14,9 @@ use App\Livewire\Admin\Category\Create as CategoryCreate;
 use App\Livewire\Admin\Category\Edit as CategoryEdit;
 use App\Livewire\Auth\InviteSetPassword;
 use App\Models\Category;
-use App\Livewire\Requester\Tickets\Index as TicketIndex;
-use App\Livewire\Requester\Tickets\Create as TicketCreate;
-use App\Livewire\Requester\Tickets\Show as TicketShow;
+use App\Livewire\Requester\Ticket\Index as TicketIndex;
+use App\Livewire\Requester\Ticket\Create as TicketCreate;
+use App\Livewire\Requester\Ticket\Show as TicketShow;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,15 +52,16 @@ Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->pre
         Route::resource('roles', RolesController::class)
               ->only(['index','store','update','destroy'])
               ->middleware('role:Super-Admin');
-    });
+});
 
-Route::middleware(['auth']) // pas besoin d'admin ici
+
+Route::middleware(['auth', 'must-set-password']) // pas besoin d'admin ici
     ->prefix('tickets')->as('tickets.')
     ->group(function () {
         Route::get('/', TicketIndex::class)->name('index')->middleware('permission:tickets.view');
         Route::get('/create', TicketCreate::class)->name('create')->middleware('permission:tickets.create');
         Route::get('/{ticket}', TicketShow::class)->name('show'); // policy fera le reste
-    });
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

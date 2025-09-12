@@ -20,6 +20,12 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 @endcan
+
+                {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
+                @can('tickets.create')
+                    <flux:navlist.item icon="ticket" :href="route('tickets.index')" :current="request()->routeIs('tickets.index')"
+                    wire:navigate>{{ __('Mes tickets') }}</flux:navlist.item>
+                @endcan
                 
                 {{-- Users : visible UNIQUEMENT si users.manage --}}
                 @can('users.manage')
