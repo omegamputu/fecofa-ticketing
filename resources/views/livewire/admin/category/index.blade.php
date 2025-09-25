@@ -6,7 +6,7 @@
     </div>
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-1">
-            <div class="border border-gray-200 rounded-lg p-4">
+            <div class="border border-neutral-200 dark:border-neutral-700 rounded-lg p-4">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                         <tr>
@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                         @foreach($categories as $category)
-                        <tr class="border-b border-gray-200 rounded-lg">
+                        <tr class="border-b border-neutral-200 dark:border-neutral-700 rounded-lg">
                             <th scope="row" class="px-6 py-4">
                                 {{ $category->id }}
                             <td class="px-6 py-4">

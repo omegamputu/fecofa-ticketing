@@ -64,10 +64,14 @@
                                 {{ $ticket->category->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ ucfirst(str_replace('_', ' ', $ticket->priority)) }}
+                                <span class="inline-flex items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-500/20">
+                                    {{ ucfirst(str_replace('_', ' ', $ticket->priority)) }}
+                                </span>
                             </td>
                             <td class="px-6 py-4">
-                                {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
+                                <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">
+                                    {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
+                                </span>
                             </td>
                             <td class="px-6 py-4">
                                 {{ $ticket->created_at->format('d/m/Y H:i') }}

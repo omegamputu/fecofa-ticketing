@@ -19,7 +19,7 @@
             utilisateur</a>
     </div>
 
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-2 border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border border-neutral-200 dark:border-neutral-700 rounded-lg">
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -38,7 +38,7 @@
         </thead>
         <tbody>
             @foreach($users as $u)
-            <tr class="border-b border-gray-200 dark:border-gray-700">
+            <tr class="border-b border-neutral-200 dark:border-neutral-700">
                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"">
                     <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                         <span
