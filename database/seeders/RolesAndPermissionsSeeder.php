@@ -59,7 +59,7 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
 
         $tech->syncPermissions([
-            'tickets.view','tickets.comment','tickets.triage','tickets.assign','tickets.resolve','tickets.reopen','reports.view'
+            'tickets.view_assigned','tickets.comment','tickets.resolve','reports.view'
         ]);
 
         $dem->syncPermissions([

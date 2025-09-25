@@ -42,4 +42,14 @@ class TicketPolicy
         return $this->comment($user, $ticket);
     }
 
+    public function resolve(User $user, Ticket $ticket): bool
+    {
+        if ($user->can('tickets.resolve') && $ticket->assigned_to === $user->id) {
+            // Technicien ou Admin
+            return true;
+        }
+
+        return $user->can('admin.access');
+    }
+
 }

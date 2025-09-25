@@ -38,6 +38,11 @@
                     @endcan
                 @endhasanyrole
 
+                @role('Technicien')
+                    <flux:navlist.item icon="wrench" :href="route('tech.tickets.index')" :current="request()->routeIs('tech.tickets.index')"
+                    wire:navigate>{{ __('Tickets assignés') }}</flux:navlist.item>
+                @endrole
+
                 {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
                 @role('Demandeur')
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
