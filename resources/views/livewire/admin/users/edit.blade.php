@@ -32,7 +32,7 @@
 
             <div>
                 {{-- Statut --}}
-                <div class="rounded-xl border bg-white dark:bg-zinc-900 p-4">
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-4">
                     <div class="text-sm text-zinc-500 dark:text-zinc-300">
                         <span class="font-semibold">Statut :</span> {{ $statusLabel }}
                     </div>

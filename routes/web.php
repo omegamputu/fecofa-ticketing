@@ -14,6 +14,12 @@ use App\Livewire\Admin\Category\Create as CategoryCreate;
 use App\Livewire\Admin\Category\Edit as CategoryEdit;
 use App\Livewire\Auth\InviteSetPassword;
 use App\Models\Category;
+use App\Livewire\Requester\Ticket\Index as TicketIndex;
+use App\Livewire\Requester\Ticket\Create as TicketCreate;
+use App\Livewire\Requester\Ticket\Show as TicketShow;
+
+use App\Livewire\Admin\Tickets\Index as AdminTicketsIndex;
+//use App\Livewire\Admin\Tickets\Edit as AdminTicketsEdit;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,11 +32,13 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
 Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->prefix('admin')
     ->name('admin')->as('admin.')
     ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        
+        Route::get('tickets', AdminTicketsIndex::class)->name('tickets.index');
+        //Route::get('tickets/{ticket}/edit', AdminTicketsEdit::class)->name('tickets.edit');
 
         // Gestion utilisateurs “classiques”
         Route::get('users', UsersIndex::class)->name('users.index');
@@ -42,14 +50,19 @@ Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->pre
         Route::get('categories/create', CategoryCreate::class)->name('categories.create');
         Route::get('categories/{category}/edit', CategoryEdit::class)->name('categories.edit');
 
-        // Gestion Admins (restreinte au Super-Admin)
-       // Route::resource('admins', AdminsController::class)->only(['index','create','store','edit','update','destroy'])->middleware('role:Super-Admin');
-
         // Gestion rôles & permissions (option : Super-Admin uniquement)
         Route::resource('roles', RolesController::class)
               ->only(['index','store','update','destroy'])
               ->middleware('role:Super-Admin');
-    });
+});
+
+Route::middleware(['auth', 'must-set-password']) // pas besoin d'admin ici
+    ->prefix('tickets')->as('tickets.')
+    ->group(function () {
+        Route::get('/', TicketIndex::class)->name('index')->middleware('permission:tickets.view');
+        Route::get('/create', TicketCreate::class)->name('create')->middleware('permission:tickets.create');
+        Route::get('/{ticket}', TicketShow::class)->name('show'); // policy fera le reste
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

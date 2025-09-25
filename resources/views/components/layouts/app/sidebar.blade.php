@@ -16,23 +16,35 @@
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Platform')" class="grid">
                 {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
-                @can('admin.access')
+                @hasanyrole('Admin|Super-Admin')
+                    @can('admin.access')
+                        <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
+                        wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                        <flux:navlist.item icon="ticket" :href="route('admin.tickets.index')" :current="request()->routeIs('admin.tickets.index')"
+                        wire:navigate>{{ __('Tickets') }}</flux:navlist.item>
+                    @endcan
+
+                    {{-- Users : visible UNIQUEMENT si users.manage --}}
+                    @can('users.manage')
+                        <flux:navlist.item icon="user" :href="route('admin.users.index')"
+                        :current="request()->routeIs('admin.users.index')" wire:navigate>{{ __('Users') }}
+                        </flux:navlist.item>
+                    @endcan
+
+                    @can('categories.manage')
+                        <flux:navlist.item icon="tag" :href="route('admin.categories.index')"
+                        :current="request()->routeIs('admin.categories.index')" wire:navigate>{{ __('Categories') }}
+                        </flux:navlist.item>
+                    @endcan
+                @endhasanyrole
+
+                {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
+                @role('Demandeur')
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                @endcan
-                
-                {{-- Users : visible UNIQUEMENT si users.manage --}}
-                @can('users.manage')
-                    <flux:navlist.item icon="user" :href="route('admin.users.index')"
-                    :current="request()->routeIs('admin.users.index')" wire:navigate>{{ __('Users') }}
-                    </flux:navlist.item>
-                @endcan
-
-                @can('categories.manage')
-                    <flux:navlist.item icon="tag" :href="route('admin.categories.index')"
-                    :current="request()->routeIs('admin.categories.index')" wire:navigate>{{ __('Categories') }}
-                    </flux:navlist.item>
-                @endcan
+                    <flux:navlist.item icon="ticket" :href="route('tickets.index')" :current="request()->routeIs('tickets.index')"
+                    wire:navigate>{{ __('Mes tickets') }}</flux:navlist.item>
+                @endrole
             </flux:navlist.group>
         </flux:navlist>
 
