@@ -48,7 +48,7 @@
                         Crée le
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Attribuer à
+                        Actions
                     </th>
                 </tr>
             </thead>
@@ -62,7 +62,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">
+                        <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($item->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
@@ -73,6 +73,11 @@
                         {{ $item->created_at->format('d/m/Y H:i') }}
                     </td>
                     <td class="px-6 py-4">
+                        @if ($item->status === 'resolved')
+                        <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer">
+                            Fermé
+                        </button>
+                        @else
                         <div class="flex gap-2">
                             <div>
                                 <select wire:model.lazy="assignees.{{ $item->id }}" id="assigneeTo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -86,10 +91,11 @@
                             <button wire:click="assign({{ $item->id }})" {{ empty($assignees[$item->id] ?? null) ? 'disabled' : '' }} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer">
                                 Assigner
                             </button>
-                        </div>
-                        @error('assignees.'.$item->id)
-                            <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
-                        @enderror
+                            </div>
+                            @error('assignees.'.$item->id)
+                                <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
+                            @enderror
+                        @endif
                     </td>
                 </tr>
                 @empty

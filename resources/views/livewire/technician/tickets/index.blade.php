@@ -20,10 +20,10 @@
 
             <div>
                 <select wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="assigned">Assignés (ouverts / en cours)</option>
+                    <option value="all">Assignés (tous)</option>
+                    <option value="open">Ouverts</option>
                     <option value="in_progress">En cours</option>
-                    <option value="resolved">Résolu</option>
-                    <option value="all">Tous</option>
+                    <option value="resolved">Résolus</option>
                 </select>
             </div>
         </div>
@@ -41,7 +41,10 @@
                         Statut
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Crée le
+                        Créé le
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Résolu le
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Actions
@@ -49,7 +52,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($tickets as $item)
+                @foreach($tickets as $item)
                 <tr wire:key="tech-ticket-{{ $item->id }}" class=" text-gray-700 dark:text-gray-400">
                     <td class="px-6 py-4">
                         {{ $item->subject }}
@@ -58,18 +61,18 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">
+                        <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($item->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->created_at->format('d/m/Y H:i') }}
                     </td>
                     <td class="px-6 py-4">
                         @if(in_array($item->status, ['open', 'in_progress']))
                         <div class="flex flex-col gap-2 mb-2">
                             <p class="text-xs text-zinc-500 mb-2">Note de résolution (optionnel)</p>
-                            <textarea class="border border-neutral-200 dark:border-neutral-700 rounded px-2 py-1" rows="2" wire:model.defer="resolutionNotes.{{ $item->id }}" placeholder="Ce qui a été fait…"></textarea>
+                            <textarea wire:model.defer="resolutionNotes.{{ $item->id }}" class="border border-neutral-200 dark:border-neutral-700 rounded px-2 py-1" rows="2" placeholder="Ce qui a été fait…"></textarea>
 
                             @error('resolutionNotes.'.$item->id)
                                 <div class="text-red-600 text-xs">{{ $message }}</div>
@@ -94,12 +97,9 @@
                         @endif
                     </td>
                 </tr>
-                @empty
-                    <tr class="border-b border-neutral-200 dark:border-neutral-700">
-                        <td class="p-3 text-zinc-500" colspan="6">Aucun ticket pour le moment assigné pour le moment.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
+    <div class="mt-4">{{ $tickets->links() }}</div>
 </div>

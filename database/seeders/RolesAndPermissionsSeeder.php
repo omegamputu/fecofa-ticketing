@@ -22,11 +22,11 @@ class RolesAndPermissionsSeeder extends Seeder
         // Permissions principales
         $permissions = [
             // Tickets
-            'tickets.create','tickets.view','tickets.comment','tickets.triage',
-            'tickets.assign','tickets.resolve','tickets.reopen',
+            'tickets.create','tickets.view','tickets.comment', 'tickets.view_assigned',
+            'tickets.assign','tickets.resolve','tickets.reopen', 'tickets.close',
 
             // Paramétrage
-            'categories.manage','sla.manage',
+            'categories.manage',
 
             // Rapports
             'reports.view',
@@ -53,8 +53,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // ---- Permissions par rôle (hors Super-Admin qui a tout via Gate::before)
         $admin->syncPermissions([
-            'admin.access','users.manage','categories.manage','sla.manage',
-            'reports.view','tickets.view','tickets.comment','tickets.triage','tickets.assign','tickets.resolve','tickets.reopen',
+            'admin.access','users.manage','categories.manage',
+            'reports.view','tickets.view','tickets.comment','tickets.close','tickets.assign','tickets.resolve','tickets.reopen',
             // 👉 Ajoute 'admins.manage','roles.manage' si tu veux que l'Admin gère aussi les Admins et rôles
         ]);
 

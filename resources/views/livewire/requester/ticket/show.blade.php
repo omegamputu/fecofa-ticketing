@@ -16,7 +16,7 @@
                         Priorité: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ ucfirst($ticket->priority) }}</span> 
                     </p>
                     <p class="text-xs text-zinc-500">
-                        Statut: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
+                        Statut: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($ticket->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
                     </p>
                 </div>
 

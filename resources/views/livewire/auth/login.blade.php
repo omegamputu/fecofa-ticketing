@@ -40,6 +40,29 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
+        $user = Auth::user();
+
+        if ($user->hasRole('Super-Admin') || $user->hasRole('Admin')) {
+
+            $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);
+
+            return;
+        }
+
+        if ($user->hasRole('Technicien')) {
+
+            $this->redirectIntended(default: route('tech.tickets.index', absolute: false), navigate: true);
+
+            return;
+        }
+
+        if ($user->hasRole('Demandeur')) {
+
+            $this->redirectIntended(default: route('tickets.index', absolute: false), navigate: true);
+
+            return;
+        }
+
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
 

@@ -52,4 +52,14 @@ class TicketPolicy
         return $user->can('admin.access');
     }
 
+    public function close(User $user, Ticket $ticket): bool
+    {
+        if ($user->can('tickets.close') && $ticket->status === 'resolved') {
+            //Admin
+            return true;
+        }
+
+        return $user->can('admin.access');
+    }
+
 }

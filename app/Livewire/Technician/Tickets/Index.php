@@ -45,6 +45,14 @@ class Index extends Component
             ]);
 
             unset($this->resolutionNotes[$ticketId]);
+
+            // 👇 force le rafraîchissement de la pagination pour voir le ticket immédiatement
+            $this->resetPage();
+
+            // (Option) notifier le Demandeur
+            if ($ticket->requester) {
+                $ticket->requester->notify(new \App\Notifications\TicketResolvedNotification($ticket));
+            }
         }
 
         session()->flash('status', "Ticket #{$ticket->id} marqué comme résolu.");
@@ -55,21 +63,26 @@ class Index extends Component
         $q = Ticket::with(['requester','assignee'])
             ->where('assigned_to', auth()->id());
 
+        //dd($q);
+
         if ($this->search) {
             $q->where(fn($qq)=>$qq
                 ->where('subject','like',"%{$this->search}%")
                 ->orWhere('description','like',"%{$this->search}%"));
         }
 
-        if ($this->status !== 'all') {
-            if ($this->status === 'assigned') {
-                $q->whereIn('status', ['open','in_progress']);
-            } else {
-                $q->where('status', $this->status);
-            }
-        }
+        // 👇 logique de filtre revue
+        match ($this->status) {
+            'open'         => $q->where('status','open'),
+            'in_progress'  => $q->where('status','in_progress'),
+            'resolved'     => $q->where('status','resolved'),
+            default        => $q->whereIn('status', ['open','in_progress','resolved']), // all
+        };
 
-        $tickets = $q->latest()->paginate(15);
+        // Trier pour mettre les non résolus en haut
+        $q->orderByRaw("FIELD(status,'open','in_progress','resolved') asc")->latest('created_at');
+
+        $tickets = $q->paginate(15);
 
         return view('livewire.technician.tickets.index', compact('tickets'))->title('Mes Tickets assignés');
     }
