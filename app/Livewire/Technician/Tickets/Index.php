@@ -3,10 +3,14 @@
 namespace App\Livewire\Technician\Tickets;
 
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
     public string $status = "assigned"; // assigned|in_progress|resolved|all
     public string $search = "";
     public array $resolutionNotes = []; // [ticketId => note]
@@ -40,14 +44,14 @@ class Index extends Component
             $ticket->update([
                 'status'         => 'resolved',
                 'resolved_at'    => now(),
-                'resolved_by'    => auth()->id(),
+                'resolved_by'    => Auth::id(),
                 'resolution_note'=> $note,
             ]);
 
             unset($this->resolutionNotes[$ticketId]);
 
-            // 👇 force le rafraîchissement de la pagination pour voir le ticket immédiatement
-            $this->resetPage();
+            // force le rafraîchissement de la pagination pour voir le ticket immédiatement
+            $this->resetPage(1);
 
             // (Option) notifier le Demandeur
             if ($ticket->requester) {

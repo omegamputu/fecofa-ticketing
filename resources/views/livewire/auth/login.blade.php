@@ -51,7 +51,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         if ($user->hasRole('Technicien')) {
 
-            $this->redirectIntended(default: route('tech.tickets.index', absolute: false), navigate: true);
+            $this->redirectIntended(default: route('tech.dashboard', absolute: false), navigate: true);
 
             return;
         }

@@ -84,7 +84,7 @@
                         </button>
                         @endif
 
-                        <button type="button" class="flex items-start text-white text-xs bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-2 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" wire:click="resolve({{ $item->id }})">
+                        <button type="button" class="flex items-start cursor-pointer text-white text-xs bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-2 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" wire:click="resolve({{ $item->id }})">
                             Marquer “Résolu”
                         </button>
                         @else
