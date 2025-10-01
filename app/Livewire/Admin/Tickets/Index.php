@@ -53,8 +53,23 @@ class Index extends Component
 
         unset($this->assignees[$ticketId]);
 
-        session()->flash('status', 'Technicien assigné avec succès.');
+        session()->flash('status', "Technicien #{$ticket->id} assigné avec succès.");
 
+    }
+
+    public function closed(int $ticketId): void 
+    {
+        $ticket = Ticket::with('requester')->findOrFail($ticketId);
+
+        // sécurité (si tu soupçonnes un 403, commente temporairement la ligne suivante pour tester)
+        abort_unless(optional($ticket->requester)->hasRole('Demandeur'), 403);
+
+        $ticket->update([
+            'status' => 'closed',
+            'closed_at' => now(),
+        ]);
+
+        session()->flash('status', "Ticket #{$ticket->id} fermé avec succès.");
     }
 
     public function render()

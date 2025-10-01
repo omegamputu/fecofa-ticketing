@@ -19,6 +19,8 @@ use App\Livewire\Requester\Ticket\Create as TicketCreate;
 use App\Livewire\Requester\Ticket\Show as TicketShow;
 
 use App\Livewire\Admin\Tickets\Index as AdminTicketsIndex;
+use App\Livewire\Technician\Dashboard as TechDashboard;
+use App\Livewire\Technician\Tickets\Index as TechTicketsIndex;
 //use App\Livewire\Admin\Tickets\Edit as AdminTicketsEdit;
 
 Route::get('/', function () {
@@ -31,6 +33,13 @@ Route::get('/invite/accept/{token}', InviteSetPassword::class)
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::middleware(['auth','role:Technicien']) // réservé aux Techniciens
+    ->prefix('tech')->as('tech.')
+    ->group(function () {
+        Route::get('tickets', TechTicketsIndex::class)->name('tickets.index');
+        Route::get('dashboard', TechDashboard::class)->name('dashboard');
+    });
 
 Route::middleware(['auth', 'permission:admin.access', 'must-set-password'])->prefix('admin')
     ->name('admin')->as('admin.')
