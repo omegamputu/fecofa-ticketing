@@ -62,7 +62,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($item->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">
+                        <span class="inline-flex items-center rounded-md bg-blue-700 px-2 py-1 text-xs font-medium @if ($item->status === 'in_progress') bg-green-600 text-white @endif @if ($item->status === 'resolved') bg-green-500 text-white @endif @if ($item->status === 'closed') bg-red-600 text-white @endif text-white">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
@@ -73,8 +73,10 @@
                         {{ $item->created_at->format('d/m/Y H:i') }}
                     </td>
                     <td class="px-6 py-4">
-                        @if ($item->status === 'resolved')
-                        <button class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer">
+                        @if ($item->status === 'closed')
+                            <span class="text-zinc-500">Aucune action possible</span>
+                        @elseif ($item->status === 'resolved')
+                        <button wire:click="closed({{ $item->id }})" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer">
                             Fermé
                         </button>
                         @else

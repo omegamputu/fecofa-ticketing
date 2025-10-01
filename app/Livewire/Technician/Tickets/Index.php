@@ -80,11 +80,12 @@ class Index extends Component
             'open'         => $q->where('status','open'),
             'in_progress'  => $q->where('status','in_progress'),
             'resolved'     => $q->where('status','resolved'),
-            default        => $q->whereIn('status', ['open','in_progress','resolved']), // all
+            'closed'       => $q->where('status','closed'),
+            default        => $q->whereIn('status', ['open','in_progress','resolved', 'closed']), // all
         };
 
         // Trier pour mettre les non résolus en haut
-        $q->orderByRaw("FIELD(status,'open','in_progress','resolved') asc")->latest('created_at');
+        $q->orderByRaw("FIELD(status,'open','in_progress','resolved', 'closed') asc")->latest('created_at');
 
         $tickets = $q->paginate(15);
 

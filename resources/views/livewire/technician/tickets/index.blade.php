@@ -61,7 +61,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($item->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">
+                        <span class="inline-flex items-center rounded-md bg-dark-400/10 px-2 py-1 text-xs font-medium @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif text-white">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
