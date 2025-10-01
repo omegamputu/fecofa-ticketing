@@ -54,9 +54,9 @@
             <tbody>
                 @foreach($tickets as $item)
                 <tr wire:key="tech-ticket-{{ $item->id }}" class=" text-gray-700 dark:text-gray-400">
-                    <td class="px-6 py-4">
-                        {{ $item->subject }}
-                    </td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a href="{{ route('tech.tickets.show', $item) }}" class="hover:underline">{{ $item->subject }}</a>
+                    </th>
                     <td class="px-6 py-4">
                         {{ $item->requester->name }}
                     </td>

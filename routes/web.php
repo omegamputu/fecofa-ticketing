@@ -21,7 +21,7 @@ use App\Livewire\Requester\Ticket\Show as TicketShow;
 use App\Livewire\Admin\Tickets\Index as AdminTicketsIndex;
 use App\Livewire\Technician\Dashboard as TechDashboard;
 use App\Livewire\Technician\Tickets\Index as TechTicketsIndex;
-//use App\Livewire\Admin\Tickets\Edit as AdminTicketsEdit;
+use App\Livewire\Technician\Tickets\Show as TechTicketShow;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +38,7 @@ Route::middleware(['auth','role:Technicien']) // réservé aux Techniciens
     ->prefix('tech')->as('tech.')
     ->group(function () {
         Route::get('tickets', TechTicketsIndex::class)->name('tickets.index');
+        Route::get('tickets/{ticket}', TechTicketShow::class)->name('tickets.show');
         Route::get('dashboard', TechDashboard::class)->name('dashboard');
     });
 
