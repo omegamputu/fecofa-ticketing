@@ -54,47 +54,25 @@
             <tbody>
                 @foreach($tickets as $item)
                 <tr wire:key="tech-ticket-{{ $item->id }}" class=" text-gray-700 dark:text-gray-400">
-                    <td class="px-6 py-4">
-                        {{ $item->subject }}
-                    </td>
-                    <td class="px-6 py-4">
+                    <th scope="row" class="px-6 py-4 text-xs text-gray-900 whitespace-nowrap dark:text-white">
+                        <a href="{{ route('tech.tickets.show', $item) }}" class="hover:underline">{{ $item->subject }}</a>
+                    </th>
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->requester->name }}
                     </td>
-                    <td class="px-6 py-4">
-                        <span class="inline-flex items-center rounded-md bg-dark-400/10 px-2 py-1 text-xs font-medium @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif text-white">
+                    <td class="px-6 py-4 text-xs">
+                        <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-blue-700 text-white @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
                     <td class="px-6 py-4 text-xs">
                         {{ $item->created_at->format('d/m/Y H:i') }}
                     </td>
+                    <td class="px-6 py-4 text-xs">
+                        {{ $item->status === 'closed' ? $item->resolved_at->format('d/m/Y H:i') : '-' }}
+                    </td>
                     <td class="px-6 py-4">
-                        @if(in_array($item->status, ['open', 'in_progress']))
-                        <div class="flex flex-col gap-2 mb-2">
-                            <p class="text-xs text-zinc-500 mb-2">Note de résolution (optionnel)</p>
-                            <textarea wire:model.defer="resolutionNotes.{{ $item->id }}" class="border border-neutral-200 dark:border-neutral-700 rounded px-2 py-1" rows="2" placeholder="Ce qui a été fait…"></textarea>
-
-                            @error('resolutionNotes.'.$item->id)
-                                <div class="text-red-600 text-xs">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        @if($item->status === 'open')
-                        <button type="button" class="border rounded px-3 py-1" wire:click="start({{ $item->id }})">
-                            Passer en cours
-                        </button>
-                        @endif
-
-                        <button type="button" class="flex items-start cursor-pointer text-white text-xs bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-2 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" wire:click="resolve({{ $item->id }})">
-                            Marquer “Résolu”
-                        </button>
-                        @else
-                            <div class="text-xs">
-                            Résolu le {{ $item->resolved_at?->format('d/m/Y H:i') }}
-                            @if($item->resolution_note)
-                                — <span class="italic">{{ $item->resolution_note }}</span>
-                            @endif
-                            </div>
-                        @endif
+                        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('tech.tickets.show', $item) }}" wire:navigate>Show</a>
                     </td>
                 </tr>
                 @endforeach

@@ -13,7 +13,7 @@ class TicketPolicy
      */
     public function view(User $user, Ticket $ticket): bool
     {
-        return $user->id === $ticket->created_by || $user->can('admin.access');
+        return $user->id === $ticket->created_by || $user->can('tickets.view_assigned') || $user->can('admin.access');
     }
 
 
@@ -31,7 +31,7 @@ class TicketPolicy
      */
     public function comment(User $user, Ticket $ticket): bool
     {
-        return $user->id === $ticket->created_by || $user->can('admin.access');
+        return $user->id === $ticket->created_by || $user->can('tickets.view_assigned') || $user->can('admin.access');
     }
 
     /**

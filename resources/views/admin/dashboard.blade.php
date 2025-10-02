@@ -46,6 +46,9 @@
                             Crée le
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Résolu le
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             
                         </th>
                     </tr>
@@ -53,24 +56,25 @@
                 <tbody>
                     @forelse($lastTickets as $ticket)
                     <tr class=" text-gray-700 dark:text-gray-400">
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-xs">
                             {{ $ticket->subject }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-xs">
                             {{ $ticket->requester->name }}
                         </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($ticket->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">
+                        <td class="px-6 py-4 text-xs">
+                            <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-blue-700 @endif @if ($ticket->status === 'in_progress') bg-cyan-500 @endif px-2 py-1 text-xs font-medium @if ($ticket->status === 'resolved') bg-green-500 @endif @if ($ticket->status === 'closed') bg-red-700 @endif text-white">
                                 {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-500/20">
-                                {{ $ticket->assignee->name ?? '_' }}
-                            </span>
+                        <td class="px-6 py-4 text-xs">
+                            {{ $ticket->assignee->name ?? '_' }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-xs">
                             {{ $ticket->created_at->format('d/m/Y H:i') }}
+                        </td>
+                        <td class="px-6 py-4 text-xs">
+                            {{ $ticket->status === 'closed' ? $ticket->resolved_at->format('d/m/Y H:i') : '-' }}
                         </td>
                     </tr>
                     @empty
