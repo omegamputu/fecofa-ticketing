@@ -58,24 +58,24 @@
             <tbody>
                 @forelse($tickets as $item)
                 <tr wire:key="ticket-{{ $item->id }}" class=" text-gray-700 dark:text-gray-400">
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->subject }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->requester->name }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         <span class="inline-flex items-center rounded-md bg-blue-700 px-2 py-1 text-xs font-medium @if ($item->status === 'in_progress') bg-cyan-400 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif text-white">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->assignee->name ?? '_' }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->created_at->format('d/m/Y H:i') }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->status === 'closed' ? $item->resolved_at->format('d/m/Y H:i') : '-' }}
                     </td>
                     <td class="px-6 py-4">

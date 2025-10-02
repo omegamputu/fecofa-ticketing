@@ -54,13 +54,13 @@
             <tbody>
                 @foreach($tickets as $item)
                 <tr wire:key="tech-ticket-{{ $item->id }}" class=" text-gray-700 dark:text-gray-400">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th scope="row" class="px-6 py-4 text-xs text-gray-900 whitespace-nowrap dark:text-white">
                         <a href="{{ route('tech.tickets.show', $item) }}" class="hover:underline">{{ $item->subject }}</a>
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         {{ $item->requester->name }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-xs">
                         <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-blue-700 text-white @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>

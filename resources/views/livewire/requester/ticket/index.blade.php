@@ -60,23 +60,23 @@
                 <tbody>
                     @forelse ($tickets as $ticket)
                         <tr class="border-b border-neutral-200 dark:border-neutral-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" class="px-6 py-4 text-xs text-gray-900 whitespace-nowrap dark:text-white">
                                 <a href="{{ route('tickets.show', $ticket) }}" class="hover:underline">{{ $ticket->subject }}</a>
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-xs">
                                 {{ $ticket->category->name }}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-xs">
                                 <span class="inline-flex items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs font-medium text-blue-400 inset-ring inset-ring-blue-500/20">
                                     {{ ucfirst(str_replace('_', ' ', $ticket->priority)) }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-xs">
                                 <span class="inline-flex items-center rounded-md bg-blue-700 text-white @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-medium">
                                     {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-xs">
                                 {{ $ticket->created_at->format('d/m/Y H:i') }}
                             </td>
                             <td class="px-6 py-4 text-xs">
