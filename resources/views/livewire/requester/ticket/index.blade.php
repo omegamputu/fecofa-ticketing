@@ -50,6 +50,9 @@
                             Créé le
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Résolu le
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Actions
                         </th>
                     </tr>
@@ -69,12 +72,15 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">
+                                <span class="inline-flex items-center rounded-md bg-blue-700 text-white @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-medium">
                                     {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                                 </span>
                             </td>
                             <td class="px-6 py-4">
                                 {{ $ticket->created_at->format('d/m/Y H:i') }}
+                            </td>
+                            <td class="px-6 py-4 text-xs">
+                                {{ $ticket->status === 'closed' ? $ticket->resolved_at->format('d/m/Y H:i') : '-' }}
                             </td>
                             <td class="px-6 py-4">
                                 <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('tickets.show',$ticket) }}" wire:navigate>Show</a>

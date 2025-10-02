@@ -13,14 +13,20 @@ class Show extends Component
 {
     use WithFileUploads;
 
-    public Ticket $ticket;
-    public string $comment = '';
-    public $attachment; 
+    public Ticket $ticket; 
+    public string $comment = ''; 
+    public $attachment; // instance de UploadedFile
+    public bool $showCommentForm = false; 
 
     public function mount(Ticket $ticket)
     {
         $this->authorize('view', $ticket);
         $this->ticket = $ticket->load(['comments.commenter', 'attachments']);
+    }
+
+    public function toggleCommentForm(): void
+    {
+        $this->showCommentForm = !$this->showCommentForm;
     }
 
     public function addComment()

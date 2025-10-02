@@ -12,10 +12,19 @@ class Show extends Component
     public $comment = '';
     public $attachment; 
 
+    public array $resolutionNotes = []; // [ticketId => note]
+
+    public bool $showCommentForm = false;
+
     public function mount(Ticket $ticket)
     {
         $this->authorize('view', $ticket);
         $this->ticket = $ticket->load(['comments.commenter', 'attachments']);
+    }
+
+    public function toggleCommentForm(): void
+    {
+        $this->showCommentForm = !$this->showCommentForm;
     }
 
     public function addComment()
@@ -43,6 +52,38 @@ class Show extends Component
         }
         $this->reset(['comment', 'attachment']);
         $this->ticket->refresh()->load(['comments.commenter', 'attachments']);
+    }
+
+    public function resolve(int $ticketId): void 
+    {
+        $ticket = Ticket::with('requester')->findOrFail($ticketId);
+
+        $this->authorize('resolve', $this->ticket);
+
+        $note = $this->resolutionNotes[$ticketId] ?? null;
+
+        $this->validate([
+            "resolutionNotes.$ticketId" => ['nullable','string','min:3'],
+        ]);
+
+        if ($this->ticket->status !== 'resolved')
+        {
+            $this->ticket->update([
+                'status'         => 'resolved',
+                'resolved_at'    => now(),
+                'resolved_by'    => auth()->id(),
+                'resolution_note'=> $note,
+            ]);
+
+            unset($this->resolutionNotes[$ticketId]);
+
+            // (Option) notifier le Demandeur
+            if ($this->requester) {
+                $this->requester->notify(new \App\Notifications\TicketResolvedNotification($this->ticket));
+            }
+        }
+
+        session()->flash('status', "Ticket #{$ticket->id} marqué comme résolu.");
     }
 
     public function render()

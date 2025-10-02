@@ -15,7 +15,7 @@
                     Priorité: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ ucfirst($ticket->priority) }}</span> 
                 </p>
                 <p class="text-xs text-zinc-500 mb-4">
-                    Statut: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($ticket->status === 'resolved') bg-indigo-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
+                    Statut: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($ticket->status === 'in_progress') bg-amber-600 @endif @if ($ticket->status === 'resolved') bg-green-600 @endif text-white inset-ring inset-ring-green-500/20">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
                 </p>
             </div>
 
@@ -44,11 +44,6 @@
                     <div class="text-red-600 text-xs">{{ $message }}</div>
                 @enderror
             </div>
-            @if($ticket->status === 'open')
-            <button type="button" class="border rounded px-3 py-1" wire:click="start({{ $ticket->id }})">
-                Passer en cours
-            </button>
-            @endif
 
             <button type="button" class="flex items-start cursor-pointer text-white text-xs bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-2 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" wire:click="resolve({{ $ticket->id }})">
                 Marquer “Résolu”
@@ -66,7 +61,7 @@
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
             <h2 class="font-semibold mb-3">Commentaires</h2>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-4">
                 @foreach($ticket->comments as $c)
                 <div class="border border-neutral-200 dark:border-neutral-700 rounded p-3">
                     <div class="text-xs text-zinc-500">{{ $c->commenter->name }} — {{ $c->created_at->format('d/m/Y H:i') }}</div>
@@ -75,6 +70,13 @@
                 @endforeach
             </div>
 
+            @if ($ticket->status === 'in_progress' || $ticket->status === 'open' || $ticket->status === 'resolved')
+                <button wire:click="toggleCommentForm" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Laisser un commentaire
+                </button>
+            @endif
+
+            @if ($showCommentForm)
             <form wire:submit="addComment" class="mt-4 space-y-3">
                 <div>
                     <label for="description" class="text-xs text-zinc-500">Description</label>
@@ -96,6 +98,7 @@
 
                 <button class="cursor-pointer focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:hover:bg-green-700 dark:focus:ring-green-800">Publish</button>
             </form>
+            @endif
         </div>
     </div>
 </div>

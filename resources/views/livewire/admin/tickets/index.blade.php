@@ -48,6 +48,9 @@
                         Crée le
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Résolu le
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Actions
                     </th>
                 </tr>
@@ -62,7 +65,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4">
-                        <span class="inline-flex items-center rounded-md bg-blue-700 px-2 py-1 text-xs font-medium @if ($item->status === 'in_progress') bg-green-600 text-white @endif @if ($item->status === 'resolved') bg-green-500 text-white @endif @if ($item->status === 'closed') bg-red-600 text-white @endif text-white">
+                        <span class="inline-flex items-center rounded-md bg-blue-700 px-2 py-1 text-xs font-medium @if ($item->status === 'in_progress') bg-cyan-400 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif text-white">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
@@ -71,6 +74,9 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $item->created_at->format('d/m/Y H:i') }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $item->status === 'closed' ? $item->resolved_at->format('d/m/Y H:i') : '-' }}
                     </td>
                     <td class="px-6 py-4">
                         @if ($item->status === 'closed')
