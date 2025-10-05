@@ -61,7 +61,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4 text-xs">
-                        <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-blue-700 text-white @if ($item->status === 'in_progress') bg-cyan-600 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif">
+                        <span class="inline-flex items-center rounded-md @if ($item->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($item->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>

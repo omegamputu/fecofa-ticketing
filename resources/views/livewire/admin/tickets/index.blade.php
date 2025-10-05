@@ -65,7 +65,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4 text-xs">
-                        <span class="inline-flex items-center rounded-md bg-blue-700 px-2 py-1 text-xs font-medium @if ($item->status === 'in_progress') bg-cyan-400 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif text-white">
+                        <span class="inline-flex items-center rounded-md @if ($item->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($item->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>
@@ -96,13 +96,13 @@
                                 </select>
                             </div>
 
-                            <button wire:click="assign({{ $item->id }})" {{ empty($assignees[$item->id] ?? null) ? 'disabled' : '' }} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer">
+                            <button wire:click="assign({{ $item->id }})" {{ empty($assignees[$item->id] ?? null) ? 'disabled' : '' }} class="bg-blue-300/90 text-blue-900 rounded-lg focus:ring-4 focus:outline-none text-sm px-5 py-2.5 text-center cursor-pointer">
                                 Assigner
                             </button>
-                            </div>
                             @error('assignees.'.$item->id)
                                 <div class="text-red-600 text-xs mt-1">{{ $message }}</div>
                             @enderror
+                        </div>
                         @endif
                     </td>
                 </tr>

@@ -105,7 +105,7 @@
                                 <span class="rounded-md bg-emerald-300/90 px-2 py-0.5 text-xs font-semibold text-emerald-900">Ouvert</span>
                             </li>
                             <li class="flex items-center justify-between rounded-lg bg-white/5 p-3">
-                                <span class="truncate">Réseau – coupure étage 2</span>
+                                <span class="truncate">Réseau – aucun accès internet</span>
                                 <span class="rounded-md bg-blue-300/90 px-2 py-0.5 text-xs font-semibold text-blue-900">Assigné</span>
                             </li>
                         </ul>

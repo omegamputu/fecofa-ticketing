@@ -14,7 +14,7 @@
 
                 @foreach ($assigned as $ticket)
                 <div class="flex items-start pb-2 mb-3 @if(!$loop->last) border-b border-neutral-200 dark:border-neutral-700 @endif">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">#{{ $ticket->id }} - {{ $ticket->subject }} - {{ $ticket->priority }} - Assigné : <span class="font-semibold text-white">{{ $ticket->assignee->name ? $ticket->assignee->name : "Non assigné" }}</span> </p>                    
+                    <p class="text-sm text-gray-500 dark:text-gray-400">#{{ $ticket->id }} - {{ $ticket->subject }} - {{ $ticket->priority }} - <span class="rounded-md bg-blue-300/90 px-2 py-0.5 text-xs font-semibold text-blue-900">Assigné: </span> <span class="font-semibold text-white">{{ $ticket->assignee->name ? $ticket->assignee->name : "Non assigné" }}</span> </p>                    
                 </div>
                 @endforeach
             </div>
