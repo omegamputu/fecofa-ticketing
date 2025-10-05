@@ -21,7 +21,13 @@ class Dashboard extends Component
         $resolved = Ticket::with('requester', 'assignee')
                                 ->fromRequesters()->resolved()
                                 ->latest()->paginate(10, ['*'], 'resolved_page');
+        
+        $closed = Ticket::with('requester', 'assignee')
+                                ->fromRequesters()->closed()
+                                ->where('assigned_to', auth()->id())
+                                ->where('status', 'closed')
+                                ->latest()->paginate(10, ['*'], 'closed_page');
 
-        return view('livewire.technician.dashboard', compact(['unassigned', 'assigned', 'resolved']))->title('Dashboard Technicien');
+        return view('livewire.technician.dashboard', compact(['unassigned', 'assigned', 'resolved', 'closed']))->title('Dashboard Technicien');
     }
 }

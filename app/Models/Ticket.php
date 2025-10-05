@@ -63,6 +63,7 @@ class Ticket extends Model
     public function scopeUnassigned($q) { return $q->whereNull('assigned_to')->whereIn('status', ['open', 'in_progress']);}
     public function scopeAssigned($q) { return $q->whereNotNull('assigned_to')->whereIn('status', ['open', 'in_progress']);}
     public function scopeResolved($q)  { return $q->where('status', 'resolved'); }
+    public function scopeClosed($q)  { return $q->where('status', 'closed'); }
     public function scopeAssignedTo($q, $uid) { return $q->where('assigned_to', $uid); }
 
     public function resolver()
