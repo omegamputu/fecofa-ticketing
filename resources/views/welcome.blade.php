@@ -97,7 +97,7 @@
 
                         <ul class="space-y-2 text-sm">
                             <li class="flex items-center justify-between rounded-lg bg-white/5 p-3">
-                                <span class="truncate">Problème d’accès Email</span>
+                                <span class="truncate">Problème d’accès Email - Mot de passe</span>
                                 <span class="rounded-md bg-yellow-300/90 px-2 py-0.5 text-xs font-semibold text-yellow-900">En cours</span>
                             </li>
                             <li class="flex items-center justify-between rounded-lg bg-white/5 p-3">
