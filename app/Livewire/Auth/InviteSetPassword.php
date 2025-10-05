@@ -57,6 +57,6 @@ class InviteSetPassword extends Component
     }
     public function render()
     {
-        return view('livewire.auth.invite-set-password')->title('Définir mon mot de passe')->layout('components.layouts.guest');
+        return view('livewire.auth.invite-set-password')->title('Définir mon mot de passe')->layout('components.layouts.auth');
     }
 }

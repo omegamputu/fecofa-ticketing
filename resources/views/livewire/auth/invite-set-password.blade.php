@@ -1,5 +1,5 @@
 <div>
-    <div class="flex flex-col items-center gap-6 mt-8">
+    <div class="flex flex-col gap-6">
         <x-auth-header :title="__('Définir mon mot de passe')" :description="__('Enter your password below to log in')" />
 
         <!-- Session Status -->

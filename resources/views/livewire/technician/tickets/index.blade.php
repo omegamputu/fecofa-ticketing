@@ -21,7 +21,6 @@
             <div>
                 <select wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="all">Assignés (tous)</option>
-                    <option value="open">Ouverts</option>
                     <option value="in_progress">En cours</option>
                     <option value="resolved">Résolus</option>
                 </select>
@@ -61,7 +60,7 @@
                         {{ $item->requester->name }}
                     </td>
                     <td class="px-6 py-4 text-xs">
-                        <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-blue-700 text-white @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-600 @endif">
+                        <span class="inline-flex items-center rounded-md @if ($item->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($item->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($item->status === 'resolved') bg-green-500 @endif @if ($item->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">
                             {{ ucfirst(str_replace('_', ' ', $item->status)) }}
                         </span>
                     </td>

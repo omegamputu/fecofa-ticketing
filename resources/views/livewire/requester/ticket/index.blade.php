@@ -72,7 +72,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-xs">
-                                <span class="inline-flex items-center rounded-md bg-blue-700 text-white @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-medium">
+                                <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($ticket->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($ticket->status === 'resolved') bg-green-500 @endif @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">
                                     {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                                 </span>
                             </td>

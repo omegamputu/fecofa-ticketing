@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\Admin\Users\Index as UsersIndex;
@@ -13,7 +11,6 @@ use App\Livewire\Admin\Category\Index as CategoryIndex;
 use App\Livewire\Admin\Category\Create as CategoryCreate;
 use App\Livewire\Admin\Category\Edit as CategoryEdit;
 use App\Livewire\Auth\InviteSetPassword;
-use App\Models\Category;
 use App\Livewire\Requester\Ticket\Index as TicketIndex;
 use App\Livewire\Requester\Ticket\Create as TicketCreate;
 use App\Livewire\Requester\Ticket\Show as TicketShow;
@@ -81,6 +78,14 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
+
+//
+// Invitation-only : bloquer /register s’il reste un lien perdu
+Route::match(['get','post'], '/register', function () {
+    return redirect()->route('login')
+        ->withErrors(['email' => "L’inscription publique est désactivée. Demandez une invitation à l’administrateur (support@fecofa.cd)."]);
+})->name('register')->middleware('guest');
+
 
 require __DIR__.'/auth.php';
 

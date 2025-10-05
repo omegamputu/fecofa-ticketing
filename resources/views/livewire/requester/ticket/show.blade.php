@@ -12,14 +12,14 @@
                     <span>Catégorie:</span> <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ $ticket->category->name }}</span> 
                 </p>
                 <p class="text-xs text-zinc-500">
-                    Priorité: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ ucfirst($ticket->priority) }}</span> 
+                    Priorité: <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-emerald-300/90 text-emerald-900">{{ ucfirst($ticket->priority) }}</span> 
                 </p>
-                <p class="text-xs text-zinc-500">
-                    Statut: <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium @if ($ticket->status === 'closed') bg-red-700 text-white @endif @if ($ticket->status === 'resolved') bg-green-500 text-white @endif text-green-400 inset-ring inset-ring-green-500/20">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
+                <p class="text-xs text-zinc-500 mb-4">
+                    Statut: <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($ticket->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($ticket->status === 'resolved') bg-green-500 @endif @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
                 </p>
             </div>
 
-            <p class="mt-4 whitespace-pre-line">{{ $ticket->description }}</p>
+            <p class="mt-4 mb-4 text-red-500 whitespace-pre-line">{{ $ticket->description }}</p>
 
             @if($ticket->attachments->count())
             <div class="mt-4">
@@ -39,9 +39,9 @@
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
             <h2 class="font-semibold mb-3">Commentaires</h2>
 
-            <div class="space-y-4">
+            <div class="space-y-4 mb-4">
                 @foreach($ticket->comments as $c)
-                <div class="border border-neutral-200 dark:border-neutral-700 rounded p-3">
+                <div class="rounded-lg bg-white/5 p-3">
                     <div class="text-xs text-zinc-500">{{ $c->commenter->name }} — {{ $c->created_at->format('d/m/Y H:i') }}</div>
                     <div class="mt-1 whitespace-pre-line text-sm">{{ $c->comment }}</div>
                 </div>
