@@ -19,7 +19,7 @@ class LanguageSwitcher extends Component
     {
         $this->locale = $this->locale === 'fr' ? 'en' : 'fr';
         Session::put('locale', $this->locale);
-        $this->redirect(request()->header('Referer') ?? route('dashboard'));
+        $this->redirect(request()->header('Referer') ?? 'dashboard'); // Redirige vers la page précédente ou le tableau de bord
     }
 
     public function render()

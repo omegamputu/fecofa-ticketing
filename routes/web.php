@@ -22,7 +22,7 @@ use App\Livewire\Technician\Tickets\Show as TechTicketShow;
 
 
 Route::get('/lang/{lang}', function ($lang) {
-    $availableLangs = ['en', 'fr'];
+    $availableLangs = ['fr', 'en'];
 
     if (in_array($lang, $availableLangs)) {
         session(['locale' => $lang]);

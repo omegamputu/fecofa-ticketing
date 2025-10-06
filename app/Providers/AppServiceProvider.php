@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        app('router')->pushMiddlewareToGroup('web', \App\Http\Middleware\SetLocale::class);
+        
         Gate::policy(Ticket::class, TicketPolicy::class);
 
         // Le Super-Admin passe avant tous les checks

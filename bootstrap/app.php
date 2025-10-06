@@ -22,8 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission'         => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
             'must-set-password'  => MustSetPassword::class,
-            'web'                => SetLocale::class,
         ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
