@@ -342,5 +342,20 @@
     "Status": "Statut",
     "Assignee": "Technicien",
     "Created At": "Crée le",
-    "Resolved At": "Résolu le"
+    "Resolved At": "Résolu le",
+    "No action possible": "Aucune action possible",
+    "Edit Ticket": "Modifier le ticket",
+    "View Ticket": "Voir le ticket",
+    "Fecofa Ticketing": "Fecofa Ticketing",
+    "No tickets at this time": "Aucun ticket pour le moment.",
+    "No tickets found": "Aucun ticket trouvé",
+    "Assign Ticket": "Assigner le ticket",
+    "Select Assignee": "Sélectionner le technicien",
+    "Ticket assigned successfully.": "Ticket assigné avec succès.",
+    "You have assigned the ticket to": "Vous avez assigné le ticket à",
+    "Ticket closed successfully.": "Ticket fermé avec succès.",
+    "The ticket has been closed.": "Le ticket a été fermé.",
+    "All status": "Tous status",
+    "Resolved": "Résolu",
+    "Search by name": "Rechercher par nom"
 }
