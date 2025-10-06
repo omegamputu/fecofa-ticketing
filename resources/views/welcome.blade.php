@@ -68,13 +68,7 @@
                     </nav>
 
                     <div class="flex items-center gap-3">
-                        @php $locale = session('locale', 'fr'); @endphp
-
-                        @if ($locale === 'fr')
-                            <a href="{{ route('lang.switch', ['lang' => 'en']) }}" class="bg-white/10 rounded-lg text-white px-4 py-2 font-semibold text-sm hover:bg-white/10 transition">EN</a>
-                        @else
-                            <a href="{{ route('lang.switch', ['lang' => 'en']) }}" class="bg-white/10 rounded-lg text-white px-4 py-2 font-semibold text-sm hover:bg-white/10 transition">FR</a>
-                        @endif
+                        <livewire:language-switcher />
                     </div>
                 </div>
             </header>
