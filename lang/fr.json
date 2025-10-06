@@ -330,5 +330,17 @@
     "Open": "Ouvert",
     "In progress": "En cours",
     "Assigned": "Assigné",
-    "IT Service": "Service Informatique"
+    "Closed": "Fermé",
+    "IT Service": "Service Informatique",
+    "Unassigned": "Non assignés",
+    "Open / In Progress": "Ouverts / En cours",
+    "Requester Tickets": "Tickets (Demandeurs)",
+    "Requester Tickets - To Be Processed": "Tickets des Demandeurs - à traiter",
+    "View All": "Voir tout",
+    "Subject": "Sujet",
+    "Requester": "Demandeur",
+    "Status": "Statut",
+    "Assignee": "Technicien",
+    "Created At": "Crée le",
+    "Resolved At": "Résolu le"
 }
