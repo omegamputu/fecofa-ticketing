@@ -20,6 +20,17 @@ use App\Livewire\Technician\Dashboard as TechDashboard;
 use App\Livewire\Technician\Tickets\Index as TechTicketsIndex;
 use App\Livewire\Technician\Tickets\Show as TechTicketShow;
 
+
+Route::get('/lang/{lang}', function ($lang) {
+    $availableLangs = ['fr', 'en'];
+
+    if (in_array($lang, $availableLangs)) {
+        session(['locale' => $lang]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');

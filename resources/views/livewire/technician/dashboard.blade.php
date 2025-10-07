@@ -2,7 +2,7 @@
      <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl mb-4">
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
             <div class="rounded-xl p-4 border border-neutral-200 dark:border-neutral-700">
-                <h3 class="mb-2">A affecter</h3>
+                <h3 class="mb-2"> {{ __("To be assigned") }} </h3>
                 @foreach ($unassigned as $ticket)
                     <div class="flex items-start pb-2 mb-3 @if(!$loop->last) border-b border-neutral-200 dark:border-neutral-700 @endif">
                         <p class="text-sm mt-2 text-gray-500 dark:text-gray-400">#{{ $ticket->id }} - {{ $ticket->subject }} - {{ $ticket->priority }} - Assigné : - </p>
@@ -10,7 +10,7 @@
                 @endforeach
             </div>
             <div class="rounded-xl p-4 border border-neutral-200 dark:border-neutral-700">
-                <h3 class="mb-2">En cours</h3>
+                <h3 class="mb-2"> {{ __("In progress") }} </h3>
 
                 @foreach ($assigned as $ticket)
                 <div class="flex items-start pb-2 mb-3 @if(!$loop->last) border-b border-neutral-200 dark:border-neutral-700 @endif">
@@ -19,7 +19,7 @@
                 @endforeach
             </div>
             <div class="rounded-xl p-4 border border-neutral-200 dark:border-neutral-700">
-                <h3 class="mb-2">Résolus</h3>
+                <h3 class="mb-2"> {{ __("Resolved") }} </h3>
 
                 @foreach ($resolved as $ticket)
                     <div class="flex items-start pb-2 mb-3 @if(!$loop->last) border-b border-neutral-200 dark:border-neutral-700 @endif">
@@ -35,22 +35,22 @@
             <thead class="text-xs text-gray-700 dark:text-gray-400 uppercase">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Sujet
+                        {{ __("Subject") }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Demandeur
+                        {{ __("Requester") }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Statut
+                        {{ __("Status") }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Créé le
+                        {{ __("Created At") }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Résolu le
+                        {{ __("Resolved At") }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Actions
+                        {{ __("Actions") }}
                     </th>
                 </tr>
             </thead>
@@ -75,7 +75,9 @@
                         {{ $item->status === 'closed' ? $item->resolved_at->format('d/m/Y H:i') : '-' }}
                     </td>
                     <td class="px-6 py-4">
-                        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('tech.tickets.show', $item) }}" wire:navigate>Show</a>
+                        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('tech.tickets.show', $item) }}" wire:navigate>
+                            {{ __("View") }}
+                        </a>
                     </td>
                 </tr>
                 @endforeach
