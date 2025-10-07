@@ -45,10 +45,10 @@
                         {{ __('Assignee') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{ __('Created at') }}
+                        {{ __('Created At') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{ __('Resolved at') }}
+                        {{ __('Resolved At') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
                         {{ __('Actions') }}

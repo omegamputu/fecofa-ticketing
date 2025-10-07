@@ -35,7 +35,7 @@
                         <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')"
                         wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                         <flux:navlist.item icon="ticket" :href="route('admin.tickets.index')" :current="request()->routeIs('admin.tickets.index')"
-                        wire:navigate>{{ __('Tickets') }}</flux:navlist.item>
+                        wire:navigate>{{ __('All Tickets') }}</flux:navlist.item>
                     @endcan
 
                     {{-- Users : visible UNIQUEMENT si users.manage --}}
@@ -56,13 +56,12 @@
                     <flux:navlist.item icon="home" :href="route('tech.dashboard')" :current="request()->routeIs('tech.dashboard')"
                         wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="wrench" :href="route('tech.tickets.index')" :current="request()->routeIs('tech.tickets.index')"
-                    wire:navigate>{{ __('Tickets assignés') }}</flux:navlist.item>
+                    wire:navigate>{{ __('Ticket assigned') }}</flux:navlist.item>
                 @endrole
 
-                {{-- Dashboard Admin : visible UNIQUEMENT si admin.access --}}
                 @role('Demandeur')
                     <flux:navlist.item icon="ticket" :href="route('tickets.index')" :current="request()->routeIs('tickets.index')"
-                    wire:navigate>{{ __('Mes tickets') }}</flux:navlist.item>
+                    wire:navigate>{{ __('My Tickets') }}</flux:navlist.item>
                 @endrole
             </flux:navlist.group>
         </flux:navlist>

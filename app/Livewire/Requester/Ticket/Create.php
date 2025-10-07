@@ -67,6 +67,6 @@ class Create extends Component
     {
         $categories = Category::select('id', 'name')->get();
 
-        return view('livewire.requester.ticket.create', compact('categories'))->title('New ticket');
+        return view('livewire.requester.ticket.create', compact('categories'))->title('Create Ticket');
     }
 }
