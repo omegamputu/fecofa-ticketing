@@ -403,5 +403,12 @@
     "Category deleted successfully.": "Catégorie supprimée avec succès.",
     "Are you sure you want to delete this category?": "Êtes-vous sûr de vouloir supprimer cette catégorie ?",
     "Yes, delete it": "Oui, supprimez-le",
-    "Category Details": "Détails de la catégorie"
+    "Category Details": "Détails de la catégorie",
+    "Mark as Resolved": "Marquer comme résolu",
+    "Add Comment": "Ajouter un commentaire",
+    "Your comment has been added successfully.": "Votre commentaire a été ajouté avec succès.",
+    "Comment added": "Commentaire ajouté",
+    "Resolution Notes (optional)": "Notes de résolution (optionnel)",
+    "Attachments": "Pièces jointes",
+    "Comments": "Commentaires"
 }

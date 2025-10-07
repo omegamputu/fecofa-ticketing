@@ -9,13 +9,13 @@
 
             <div class="flex flex-row border-b dark:border-neutral-700 gap-2 md:gap-4 mt-3 text-sm text-zinc-600">
                 <p class="text-xs text-zinc-500 block">
-                    <span>Catégorie:</span> <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ $ticket->category->name }}</span> 
+                    <span> {{ __("Category") }} :</span> <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ $ticket->category->name }}</span> 
                 </p>
                 <p class="text-xs text-zinc-500">
-                    Priorité: <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-emerald-300/90 text-emerald-900">{{ ucfirst($ticket->priority) }}</span> 
+                    {{ __("Priority") }}: <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-emerald-300/90 text-emerald-900">{{ ucfirst($ticket->priority) }}</span> 
                 </p>
                 <p class="text-xs text-zinc-500 mb-4">
-                    Statut: <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($ticket->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($ticket->status === 'resolved') bg-green-500 @endif @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
+                    {{ __("Status") }}: <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($ticket->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($ticket->status === 'resolved') bg-green-500 @endif @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
                 </p>
             </div>
 
@@ -23,7 +23,9 @@
 
             @if($ticket->attachments->count())
             <div class="mt-4">
-                <div class="text-sm font-semibold mb-1">Pièces jointes</div>
+                <div class="text-sm font-semibold mb-1">
+                    {{ __("Attachments") }}
+                </div>
                 <ul class="list-disc pl-5 text-sm">
                 @foreach($ticket->attachments as $a)
                     <li>
@@ -37,7 +39,9 @@
 
             @if(in_array($ticket->status, ['open', 'in_progress']))
             <div class="flex flex-col gap-2 mb-2">
-                <p class="text-xs text-zinc-500 mb-2">Note de résolution (optionnel)</p>
+                <p class="text-xs text-zinc-500 mb-2">
+                    {{ __("Resolution Notes (optional)") }}
+                </p>
                 <textarea wire:model.defer="resolutionNotes.{{ $ticket->id }}" class="text-xs border border-neutral-200 dark:border-neutral-700 rounded px-2 py-1" rows="4" placeholder="Ce qui a été fait…"></textarea>
 
                 @error('resolutionNotes.'.$ticket->id)
@@ -46,11 +50,11 @@
             </div>
 
             <button type="button" class="flex items-start cursor-pointer text-white text-xs bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-2 py-1.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" wire:click="resolve({{ $ticket->id }})">
-                Marquer “Résolu”
+                {{ __("Mark as Resolved") }}
             </button>
             @else
             <div class="text-xs">
-                Résolu le {{ $ticket->resolved_at?->format('d/m/Y H:i') }}
+                {{ __("Resolved At") }} {{ $ticket->resolved_at?->format('d/m/Y H:i') }}
                 @if($ticket->resolution_note)
                     — <span class="italic">{{ $ticket->resolution_note }}</span>
                 @endif
@@ -59,7 +63,9 @@
         </div>
 
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
-            <h2 class="font-semibold mb-3">Commentaires</h2>
+            <h2 class="font-semibold mb-3">
+                {{ __("Comments") }}
+            </h2>
 
             <div class="space-y-4 mb-4">
                 @foreach($ticket->comments as $c)
@@ -72,14 +78,16 @@
 
             @if ($ticket->status === 'in_progress' || $ticket->status === 'open' || $ticket->status === 'resolved')
                 <button wire:click="toggleCommentForm" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Laisser un commentaire
+                    {{ $showCommentForm ? __("Cancel") : __("Add Comment") }}
                 </button>
             @endif
 
             @if ($showCommentForm)
             <form wire:submit="addComment" class="mt-4 space-y-3">
                 <div>
-                    <label for="description" class="text-xs text-zinc-500">Description</label>
+                    <label for="description" class="text-xs text-zinc-500">
+                        {{ __("Your Comment") }}
+                    </label>
                     <textarea wire:model.defer="comment" id="description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your comment..."></textarea>
                 </div>
 
