@@ -1,8 +1,11 @@
 <div>
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
-    <div class="flex justify-items-start mb-5">
-        <a href="{{ route('admin.categories.create') }}" wire:navigate class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 px-3 py-2">+ Add category</a>
+
+    <div class="flex justify-end mb-5">
+        <a href="{{ route('admin.categories.create') }}" wire:navigate class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 px-3 py-2">
+            {{ __("Create Category") }}
+        </a>
     </div>
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <div class="grid auto-rows-min gap-4 md:grid-cols-1">
@@ -14,13 +17,13 @@
                                 Id
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Name
+                                {{ __("Name") }}
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Description
+                                {{ __("Description") }}
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Actions
+                                {{ __("Actions") }}
                             </th>
                         </tr>
                     </thead>
@@ -36,8 +39,12 @@
                                 {{ $category->description }}
                             </td>
                             <td class="px-6 py-4">
-                                <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('admin.categories.edit',$category) }}" wire:navigate>Éditer</a>
-                                <button class="font-medium text-red-600 dark:text-red-500 hover:underline" wire:click="delete({{ $category->id }})" onclick="return confirm('Supprimer ?')">Supprimer</button>
+                                <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('admin.categories.edit',$category) }}" wire:navigate>
+                                    {{ __("Edit") }}
+                                </a>
+                                <button class="font-medium text-red-600 dark:text-red-500 cursor-pointer hover:underline" wire:click="delete({{ $category->id }})" onclick="return confirm({{ __('Are you sure you want to delete this category?') }})">
+                                    {{ __("Delete") }}
+                                </button>
                             </td>
                         </tr>
                         @endforeach

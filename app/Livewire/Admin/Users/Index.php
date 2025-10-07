@@ -23,7 +23,7 @@ class Index extends Component
         }))
         ->latest()->paginate(10);
 
-        return view('livewire.admin.users.index', compact('users'))->title('Liste utilisateurs');
+        return view('livewire.admin.users.index', compact('users'))->title('Liste des utilisateurs');
     }
 
     public function delete(int $id)
