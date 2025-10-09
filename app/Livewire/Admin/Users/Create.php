@@ -3,6 +3,8 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
+use App\Notifications\InvitationResetPassword;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Livewire\Component;
@@ -37,8 +39,9 @@ class Create extends Component
 
         $user->assignRole($this->role); // Assign role
         // Invitation
-      
-        Password::broker('invites')->sendResetLink(['email' => $user->email]);
+
+        // Alternatively, you can use the sendInvite method
+        $this->sendInvite($user);
 
         $user->forceFill([
             'invited_at' => now(),
@@ -50,6 +53,14 @@ class Create extends Component
 
          return redirect()->route('admin.users.index');
     }
+
+    public function sendInvite(User $user): void
+    {
+        Cache::put("invite:{$user->email}", true, now()->addMinutes(2));
+
+        Password::broker('invites')->sendResetLink(['email' => $user->email]);
+    }
+
     public function render()
     {
         return view('livewire.admin.users.create')->title('Add user');
