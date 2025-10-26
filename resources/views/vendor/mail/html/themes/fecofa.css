@@ -1,10 +1,30 @@
-/* Thème FECOFA (vert émeraude) */
-body, .wrapper { background-color: #f3f4f6; }           /* gris clair */
-.header a { color:#0b7a59 !important; }
-h1, h2, h3 { color:#0b7a59 !important; }
-a { color:#0b7a59 !important; }
-.button-primary {
-  background-color:#0b7a59 !important; border-color:#0b7a59 !important;
+/* FECOFA Ticketing Mail Theme */
+body {
+    background-color: #f3f4f6;
+    font-family: 'Inter', Arial, sans-serif;
+    color: #1f2937;
 }
-.panel { background:#ecfdf5; border-color:#0b7a59; }   /* vert très clair */
-.footer { color:#6b7280 !important; }
+
+h1, h2, h3 {
+    color: #065f46;
+    font-weight: 700;
+}
+
+a {
+    color: #047857;
+}
+
+a.button-primary {
+    background-color: #047857;
+    border-radius: 8px;
+    color: #fff !important;
+    text-decoration: none;
+    padding: 12px 24px;
+    display: inline-block;
+}
+
+.footer {
+    color: #6b7280;
+    text-align: center;
+    font-size: 13px;
+}

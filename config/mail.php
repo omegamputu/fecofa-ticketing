@@ -114,7 +114,7 @@ return [
     ],
 
     'markdown' => [
-        'theme' => 'fecofa',   // <-- nom du fichier CSS sans .css
+        'theme' => 'default',   // <-- nom du fichier CSS sans .css
         'paths' => [resource_path('views/vendor/mail')],
     ],
 

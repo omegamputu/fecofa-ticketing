@@ -1,5 +1,5 @@
 @component('mail::message')
-# Bonjour {{ $user->name }},
+# Bonjour, {{ $user->name }},
 
 Vous avez demandé à réinitialiser votre mot de passe.
 

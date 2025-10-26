@@ -32,7 +32,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="text-white bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                <button type="submit" class="text-white bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer">
                     {{ __("Save") }}
                 </button>
             </form>
