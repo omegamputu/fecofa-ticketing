@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class InvitationResetPassword extends Notification
+class PasswordResetCustom extends Notification
 {
     use Queueable;
 
@@ -16,7 +16,7 @@ class InvitationResetPassword extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(string $token)
+    public function __construct($token)
     {
         //
         $this->token = $token;
@@ -37,18 +37,17 @@ class InvitationResetPassword extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = url(route('invite.accept', [
+        $url = url(route('password.reset', [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
 
         return (new MailMessage)
-            ->subject('Invitation à FECOFA Ticketing')
-            ->markdown('mail.invitation', [
-                'user' => $notifiable,
-                'url' => $url,
-                'expires' => (int) config('auth.passwords.invites.expire', 60),
-            ]);
+                ->subject("Réinitialisation de mot de passe")
+                ->markdown('mail.password-reset', [
+                    'user' => $notifiable,
+                    'url' => $url,
+                ]);
     }
 
     /**

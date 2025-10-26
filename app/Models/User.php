@@ -4,7 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Notifications\CustomResetPassword;
 use App\Notifications\InvitationResetPassword;
+use App\Notifications\PasswordResetCustom;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 // ⬇️ AJOUTER ces deux use/implements
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable implements CanResetPasswordContract
 {
@@ -71,6 +75,15 @@ class User extends Authenticatable implements CanResetPasswordContract
 
     public function sendPasswordResetNotification($token): void
     {
-        $this->notify(new InvitationResetPassword($token));
+        // True si c'était une INVITATION (flag posé juste avant sendResetLink)
+        $isInvite = Cache::pull("invite:{$this->email}", false);
+
+        if ($isInvite) {
+             // Email d’INVITATION (ta vue markdown + route invite.accept)
+            $this->notify(new InvitationResetPassword($token));
+        } else {
+            // Email de RESET “oubli de mot de passe” (custom aussi si tu veux)
+            $this->notify(new PasswordResetCustom($token));
+        }
     }
 }
