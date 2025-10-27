@@ -13,7 +13,7 @@ et au service informatique de les suivre, prioriser, assigner et résoudre effic
 - Rapports et statistiques (SLA, temps de résolution, tickets par service)
 
 ## 🛠️ Technologies
-- **Backend** : Laravel (PHP) ou Django (Python)
+- **Backend** : Laravel (PHP)
 - **Frontend** : Blade + Livewire
 - **Base de données** : MySQL
 - **Infrastructure** : Docker, Nginx
@@ -28,7 +28,6 @@ et au service informatique de les suivre, prioriser, assigner et résoudre effic
 
 ## 👥 Contributeurs
 - Service informatique FECOFA
-- Direction Technique
 - Contributions internes
 
-📌 Projet en cours de développement – version MVP prévue prochainement.
+📌 Projet en cours de développement.
