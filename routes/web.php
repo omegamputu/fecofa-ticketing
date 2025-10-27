@@ -16,6 +16,7 @@ use App\Livewire\Requester\Ticket\Create as TicketCreate;
 use App\Livewire\Requester\Ticket\Show as TicketShow;
 
 use App\Livewire\Admin\Tickets\Index as AdminTicketsIndex;
+use App\Livewire\NotificationsPanel;
 use App\Livewire\Technician\Dashboard as TechDashboard;
 use App\Livewire\Technician\Tickets\Index as TechTicketsIndex;
 use App\Livewire\Technician\Tickets\Show as TechTicketShow;
@@ -84,6 +85,7 @@ Route::middleware(['auth', 'must-set-password']) // pas besoin d'admin ici
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
+    Route::get('/notifications', NotificationsPanel::class)->name('notifications.index');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');

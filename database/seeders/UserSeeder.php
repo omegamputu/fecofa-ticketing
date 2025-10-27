@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // 
-        $users = User::factory()->count(10)->create();
+        $users = User::factory()->count(5)->create();
 
         foreach ($users as $user) {
             $user->assignRole('Demandeur');
         }
 
-        $techs = $users->random(3);
+        $techs = $users->random(2);
 
         foreach ($techs as $tech) {
             $tech->syncRoles(['Technicien']);

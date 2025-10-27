@@ -59,7 +59,7 @@ class TicketCreatedNotification extends Notification
             'priority' => $this->ticket->priority ?? null,
             'status' => $this->ticket->status ?? null,
             'created_by' => $this->author?->name,
-            'message' => "{$this->author?->name} a créé un nouveau ticket : \"{$this->ticket->subject})\".",
+            'message' => "{$this->author?->name} a créé un nouveau ticket : \"({$this->ticket->subject})\".",
         ];
     }
 }

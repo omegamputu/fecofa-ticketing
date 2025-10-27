@@ -4,6 +4,8 @@ namespace App\Livewire\Technician\Tickets;
 
 use App\Models\Ticket;
 use App\Models\TicketAttachment;
+use App\Models\User;
+use App\Notifications\Ticket\TicketResolvedNotification;
 use Livewire\Component;
 
 class Show extends Component
@@ -77,9 +79,12 @@ class Show extends Component
 
             unset($this->resolutionNotes[$ticketId]);
 
-            // (Option) notifier le Demandeur
-            if ($this->requester) {
-                $this->requester->notify(new \App\Notifications\TicketResolvedNotification($this->ticket));
+            $admins = User::role(['Super-Admin', 'Admin'])->get();
+
+            foreach ($admins as $admin) {
+                $admin->notify(
+                    new TicketResolvedNotification($ticket, auth()->user())
+                );
             }
         }
 

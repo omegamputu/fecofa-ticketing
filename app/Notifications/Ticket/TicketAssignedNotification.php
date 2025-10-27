@@ -44,7 +44,7 @@ class TicketAssignedNotification extends Notification
             'priority' => $this->ticket->priority ?? null,
             'status' => $this->ticket->status ?? null,
             'assigned_by' => $this->assignedBy?->name,
-            'message' => "un ticket vous a été assigné : \"{$this->ticket->subject})\".",
+            'message' => "un ticket vous a été assigné : \"({$this->ticket->subject})\".",
         ];
     }
 
