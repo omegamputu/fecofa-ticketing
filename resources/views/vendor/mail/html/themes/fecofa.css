@@ -1,0 +1,30 @@
+/* FECOFA Ticketing Mail Theme */
+body {
+    background-color: #f3f4f6;
+    font-family: 'Inter', Arial, sans-serif;
+    color: #1f2937;
+}
+
+h1, h2, h3 {
+    color: #065f46;
+    font-weight: 700;
+}
+
+a {
+    color: #047857;
+}
+
+a.button-primary {
+    background-color: #047857;
+    border-radius: 8px;
+    color: #fff !important;
+    text-decoration: none;
+    padding: 12px 24px;
+    display: inline-block;
+}
+
+.footer {
+    color: #6b7280;
+    text-align: center;
+    font-size: 13px;
+}

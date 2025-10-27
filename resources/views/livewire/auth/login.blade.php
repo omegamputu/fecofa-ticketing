@@ -40,6 +40,29 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
+        $user = Auth::user();
+
+        if ($user->hasRole('Super-Admin') || $user->hasRole('Admin')) {
+
+            $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);
+
+            return;
+        }
+
+        if ($user->hasRole('Technicien')) {
+
+            $this->redirectIntended(default: route('tech.dashboard', absolute: false), navigate: true);
+
+            return;
+        }
+
+        if ($user->hasRole('Demandeur')) {
+
+            $this->redirectIntended(default: route('tickets.index', absolute: false), navigate: true);
+
+            return;
+        }
+
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
 
@@ -88,7 +111,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
             required
             autofocus
             autocomplete="email"
-            placeholder="email@example.com"
+            placeholder="email@fecofa.cd"
         />
 
         <!-- Password -->
@@ -107,7 +130,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
                 <flux:link class="absolute end-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
                     {{ __('Forgot your password?') }}
                 </flux:link>
-            @endif
+            @endif 
         </div>
 
         <!-- Remember Me -->
@@ -117,11 +140,4 @@ new #[Layout('components.layouts.auth')] class extends Component {
             <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
         </div>
     </form>
-
-    @if (Route::has('register'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-            <span>{{ __('Don\'t have an account?') }}</span>
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-        </div>
-    @endif
 </div>

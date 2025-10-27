@@ -113,4 +113,9 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'markdown' => [
+        'theme' => 'default',   // <-- nom du fichier CSS sans .css
+        'paths' => [resource_path('views/vendor/mail')],
+    ],
+
 ];
