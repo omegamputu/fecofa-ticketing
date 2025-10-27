@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Tickets;
 
 use App\Models\Ticket;
 use App\Models\User;
+use App\Notifications\Ticket\TicketAssignedNotification;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -52,6 +53,11 @@ class Index extends Component
         ]);
 
         unset($this->assignees[$ticketId]);
+
+        $technician = User::find($assigneeId);
+
+        // Notification au technicien
+        $technician->notify(new TicketAssignedNotification($ticket, auth()->user()));
 
         session()->flash('status', "Technicien #{$ticket->id} assigné avec succès.");
 

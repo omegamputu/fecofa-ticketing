@@ -12,10 +12,10 @@
                     <span>{{ __("Category") }}:</span> <span class="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 inset-ring inset-ring-green-500/20">{{ $ticket->category->name }}</span> 
                 </p>
                 <p class="text-xs text-zinc-500">
-                    {{ __("Priority") }}: <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-emerald-300/90 text-emerald-900">{{ ucfirst($ticket->priority) }}</span> 
+                    {{ __("Priority") }}: <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium bg-blue-400/10 text-blue-400 inset-ring inset-ring-blue-500/20">{{ ucfirst($ticket->priority) }}</span> 
                 </p>
                 <p class="text-xs text-zinc-500 mb-4">
-                    {{ __("Status") }}: <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($ticket->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($ticket->status === 'resolved') bg-green-500 @endif @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
+                    {{ __("Status") }}: <span class="inline-flex items-center rounded-md @if ($ticket->status === 'open') bg-emerald-300/90 text-emerald-900 @endif @if ($ticket->status === 'in_progress') bg-yellow-300/90 text-yellow-900 @endif @if ($ticket->status === 'resolved') bg-green-500 text-white @endif @if ($ticket->status === 'closed') bg-red-700 text-white @endif px-2 py-1 text-xs font-semibold">{{ str_replace('_',' ',ucfirst($ticket->status)) }}</span>
                 </p>
             </div>
 
@@ -53,7 +53,7 @@
             </div>
 
             @if ($ticket->status === 'in_progress' || $ticket->status === 'open' || $ticket->status === 'resolved')
-                <button wire:click="toggleCommentForm" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button wire:click="toggleCommentForm" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer">
                     {{ $showCommentForm ? __("Cancel") : __("Add Comment") }}
                 </button>
             @endif

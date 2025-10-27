@@ -5,6 +5,8 @@ namespace App\Livewire\Requester\Ticket;
 use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\TicketAttachment;
+use App\Models\User;
+use App\Notifications\Ticket\TicketCreatedNotification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -54,6 +56,12 @@ class Create extends Component
                     'size'          => $f->getSize(),
                 ]);
             }
+        }
+
+        $admins = User::role(['Super-Admin', 'Admin'])->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new TicketCreatedNotification($ticket, auth()->user()));
         }
 
         // Flash message & redirect

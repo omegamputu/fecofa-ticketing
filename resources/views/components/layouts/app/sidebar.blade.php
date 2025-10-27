@@ -63,6 +63,23 @@
                     <flux:navlist.item icon="ticket" :href="route('tickets.index')" :current="request()->routeIs('tickets.index')"
                     wire:navigate>{{ __('My Tickets') }}</flux:navlist.item>
                 @endrole
+
+                <flux:navlist.item
+                    icon="bell"
+                    :href="route('notifications.index')"
+                    :current="request()->routeIs('notifications.index')"
+                    wire:navigate
+                >
+                    Notifications
+                    @php
+                        $unread = auth()->user()->unreadNotifications()->count();
+                    @endphp
+                    @if($unread > 0)
+                        <span class="ml-auto inline-flex items-center rounded-full bg-emerald-600 text-[10px] font-semibold leading-none px-2 py-0.5 text-white">
+                            {{ $unread }}
+                        </span>
+                    @endif
+                </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 
