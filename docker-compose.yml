@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ticketing_app
+    container_name: helpdesk_app
     working_dir: /var/www
     volumes:
       - .:/var/www
@@ -21,7 +21,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root      # Définit le mot de passe root
-      MYSQL_DATABASE: ticketing_db        # Crée la base de données automatiquement
+      MYSQL_DATABASE: fecofa_helpdesk        # Crée la base de données automatiquement
       MYSQL_USER: Admin       # Crée un utilisateur standard
       MYSQL_PASSWORD: password4124         # Mot de passe de l'utilisateur laravel_user
     ports:
