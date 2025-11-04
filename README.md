@@ -1,6 +1,6 @@
-# FECOFA Ticketing System
+# FECOFA Helpde
 
-Application de gestion des tickets informatiques développée pour la **FECOFA**.  
+Application de gestion des incidents informatiques développée pour la **FECOFA**.  
 Elle permet aux différents services de signaler leurs problèmes (réseau, imprimantes, applications internes, accès utilisateurs, etc.)  
 et au service informatique de les suivre, prioriser, assigner et résoudre efficacement.
 
