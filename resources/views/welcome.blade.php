@@ -22,7 +22,7 @@
             <header class="absolute inset-x-0 top-0 z-20">
                 <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
                     <div>
-                        <h1 class="text-xl font-bold tracking-tight">FECOFA Ticketing</h1>
+                    <h1 class="text-xl font-bold tracking-tight">{{ config('app.name') }}</h1>
                         <p class="text-xs text-zinc-300"> {{ __("Incident management platform") }} </p>
                     </div>
 
@@ -118,7 +118,7 @@
 
             <footer class="relative z-10 mx-auto w-full max-w-7xl px-6 pb-10 lg:px-10">
                 <p class="text-sm font-medium"> {{ __("IT Service") }} — FECOFA</p>
-                <p class="text-xs text-zinc-400">Support : it@fecofa.cd</p>
+                <p class="text-xs text-zinc-400">Support : support@fecofa.cd</p>
             </footer>
         </main>
     </body>
