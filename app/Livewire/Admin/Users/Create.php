@@ -12,7 +12,10 @@ use Spatie\Permission\Models\Role;
 
 class Create extends Component
 {
-    public string $name = '', $email = '', $role = '';
+    public string $name = '';
+    public string $email = '';
+    public ?string $job_title = null;
+    public string $role = '';
     public array $roles = [];
 
     public function mount()
@@ -26,6 +29,7 @@ class Create extends Component
         $this->validate([
             'name'=>'required|string|max:255',
             'email' => ['required','email','max:255','unique:users,email','regex:/@fecofa\.cd$/i'],
+            'job_title'=>'nullable|string|max:255',
             'role'=>'required|in:'.implode(',',$this->roles),
         ]);
 
@@ -34,6 +38,7 @@ class Create extends Component
         $user = User::create([
             'name'=> $this->name,
             'email'=> $this->email,
+            'job_title'=> $this->job_title,
             'password'=> Hash::make(str()->random(32)), // jetable
         ]);
 

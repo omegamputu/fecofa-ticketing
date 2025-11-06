@@ -51,7 +51,7 @@
                     </span>
                     <div class="ps-3">
                         <div class="text-base font-semibold">{{ $u->name }}</div>
-                        <div class="font-normal text-gray-500">{{ $u->email }}</div>
+                        <div class="font-normal text-gray-500">{{ $u->job_title }}</div>
                     </div> 
                 </th>
                 <td class="px-6 py-4">

@@ -10,14 +10,18 @@ use Spatie\Permission\Models\Role;
 class Edit extends Component
 {
     public User $user;
-    public string $name = '', $email;
-    public array $roles = [], $selectedRoles = [];
+    public string $name = '';
+    public string $email;
+    public ?string $job_title = null;
+    public array $roles = [];
+    public array $selectedRoles = [];
     
     public function mount(User $user)
     {
         $this->user = $user;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->job_title = $user->job_title;
         $this->roles = Role::pluck('name')->toArray();
         $this->selectedRoles = $user->getRoleNames()->toArray();
     }
@@ -25,14 +29,21 @@ class Edit extends Component
     public function save()
     {
         $this->validate([
-            'name'=>'required|string|max:255',
-            'email'=>'required|email|unique:users,email,'.$this->user->id,
+            'name'  =>  'required|string|max:255',
+            'email' =>  'required|email|unique:users,email,'.$this->user->id,
+            'job_title' =>  'nullable|string|max:255',
         ]);
 
-        $this->user->update(['name'=>$this->name,'email'=>$this->email]);
+        $this->user->update([
+            'name'  => $this->name,
+            'email' => $this->email,
+            'job_title' => $this->job_title,
+        ]);
+
         $this->user->syncRoles($this->selectedRoles);
 
         session()->flash('status','Utilisateur mis à jour.');
+
         return redirect()->route('admin.users.index');
     }
 
