@@ -10,7 +10,7 @@ Réinitialiser mon mot de passe
 Si vous n’êtes pas à l’origine de cette demande, ignorez cet email.
 
 Merci,  
-**FECOFA Helpdesk**
+**L'équipe Support**
 @slot('subcopy')
 Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :  
 {{ $url }}
