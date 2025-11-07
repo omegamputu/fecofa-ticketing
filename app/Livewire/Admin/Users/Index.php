@@ -30,8 +30,14 @@ class Index extends Component
     {
 
         abort_unless(auth()->user()->can('users.manage'), 403);
+
         User::findOrFail($id)->delete();
-        session()->flash('status', 'User deleted successfully.');
+
+        $this->dispatch('toast', ['type' => 'status', 'message' => 'User deleted successfully.']);
+
+        $this->resetPage();
+
+        //session()->flash('status', 'User deleted successfully.');
     }
     
 }
