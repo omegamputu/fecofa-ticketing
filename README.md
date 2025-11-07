@@ -1,4 +1,4 @@
-# FECOFA Helpde
+# FECOFA Helpdesk
 
 Application de gestion des incidents informatiques développée pour la **FECOFA**.  
 Elle permet aux différents services de signaler leurs problèmes (réseau, imprimantes, applications internes, accès utilisateurs, etc.)  
