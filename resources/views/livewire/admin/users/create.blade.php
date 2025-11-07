@@ -1,5 +1,5 @@
 <div>
-    <div class="grid auto-rows-min gap-3 md:grid-cols-4">
+    <div class="grid auto-rows-min gap-3 md:grid-cols-3">
         <div>
             <h1 class="text-xl font-semibold mb-4">
                 {{ __("Add new user") }}
@@ -18,6 +18,13 @@
                         {{ __("Email") }}
                     </label>
                     <input type="email" wire:model.defer="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@fecofa.cd" required />
+                </div>
+
+                <div class="mb-5">
+                    <label for="jobTitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        {{ __("Job Title") }}
+                    </label>
+                    <input type="text" wire:model.defer="job_title" id="jobTitle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
                 
                 <div class="mb-5">

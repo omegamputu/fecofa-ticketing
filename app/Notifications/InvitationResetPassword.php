@@ -43,7 +43,7 @@ class InvitationResetPassword extends Notification
         ], false));
 
         return (new MailMessage)
-            ->subject('Invitation à FECOFA Ticketing')
+            ->subject('Invitation à FECOFA Helpdesk - Définir votre mot de passe')
             ->markdown('mail.invitation', [
                 'user' => $notifiable,
                 'url' => $url,
