@@ -61,10 +61,10 @@
                     {{ $u->getRoleNames()->join(', ') }}
                 </td>
                 <td class="px-6 py-4">
-                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('admin.users.edit',$u) }}" wire:navigate>
+                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" href="{{ route('admin.users.edit',$u) }}" wire:navigate>
                         {{ __("Edit") }}
                     </a>
-                    <button class="font-medium text-red-600 dark:text-red-500 hover:underline" wire:click="delete({{ $u->id }})" onclick="return confirm({{ __('Are you sure you want to delete this category?') }})">
+                    <button class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer" @click.prevent="if (confirm('Confirmer la suppression ?')) $wire.delete({{ $u->id }})">
                         {{ __("Delete") }}
                     </button>
                 </td>
